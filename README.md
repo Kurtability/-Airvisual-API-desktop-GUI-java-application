@@ -10,4 +10,7 @@ green: 098ec7aa8449fe84310f717797b88e47c0fe771a
 
 third input api function
 red: 48bb3912b9a82d9806e816d0ff228772ca616746
-green: 
+green: c10867e614f2a9bd0f4d85f6a7882926964569a4
+
+fourth input api function
+red: 
