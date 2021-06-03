@@ -28,7 +28,8 @@ public class ModelFacadeImpl implements ModelFacade {
 
     @Override
     public String Input_listSupportedCitiesFromChosenState(String state, String country) throws IOException, InterruptedException {
-        return null;
+        String response = inputFacade.Input_listSupportedCitiesFromChosenState(state,country);
+        return response;
     }
 
     @Override
