@@ -37,6 +37,21 @@ public class ModelFacadeTest {
 
     @Test
     public void listSupportedStatesFromChosenCountryTest_success() throws IOException, InterruptedException{
+        // make a mock of the returned input api for this specific function
 
+        InputFacade inputFacade = mock(InputFacade.class);
+        OutputFacade outputFacade = mock(OutputFacade.class);
+
+        ModelFacade model = new ModelFacadeImpl(inputFacade,outputFacade);
+
+        String mockCountry = "China";
+        String mockResponse = "success";
+
+        when(inputFacade.Input_listSupportedStatesFromChosenCountry(mockCountry)).thenReturn(mockResponse);
+
+
+        // test how my model handles the return
+        assertEquals(model.Input_listSupportedStatesFromChosenCountry(mockCountry),mockResponse);
+        verify(inputFacade).Input_listSupportedStatesFromChosenCountry(mockCountry);
     }
 }
