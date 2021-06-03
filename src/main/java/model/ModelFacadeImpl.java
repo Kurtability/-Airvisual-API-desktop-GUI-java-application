@@ -13,7 +13,10 @@ public class ModelFacadeImpl implements ModelFacade {
 
     @Override
     public String Input_listSupportedCountries() throws IOException, InterruptedException {
-        return null;
+        String response = inputFacade.Input_listSupportedCountries();
+
+        return response;
+
     }
 
     @Override
