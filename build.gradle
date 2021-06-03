@@ -37,9 +37,12 @@ dependencies {
 
     //JSON package
     implementation group: 'org.json', name: 'json', version: '20210307'
+
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    testImplementation "org.mockito:mockito-core:3.+"
 }
 
 application {
     // Define the main class for the application.
-    mainClassName = 'SCD2_2021_Exam.App'
+    mainClassName = 'App'
 }

@@ -1,4 +1,4 @@
 package model;
 
-public interface Output_Offline {
+public class Output_Offline {
 }

@@ -2,10 +2,17 @@ package model;
 
 import java.io.IOException;
 
-public class Input_Offline implements InputFacade{
+public class ModelFacadeImpl implements ModelFacade {
+    private InputFacade inputFacade;
+    private OutputFacade outputFacade;
+
+    public ModelFacadeImpl(InputFacade inputFacade, OutputFacade outputFacade){
+        this.inputFacade = inputFacade;
+        this.outputFacade = outputFacade;
+    }
 
     @Override
-    public String Input_listSupportedCountries() {
+    public String Input_listSupportedCountries() throws IOException, InterruptedException {
         return null;
     }
 
