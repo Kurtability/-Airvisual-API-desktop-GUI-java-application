@@ -104,7 +104,11 @@ public class ModelFacadeTest {
 
 
     //test output api
-    
+    @Test
+    public void Output_sendSMS(){
+
+    }
+
 
 
 
@@ -159,7 +163,17 @@ public class ModelFacadeTest {
     }
 
     @Test
-    public void Output_sendSMS(){
+    public void JsonParser2Test(){
+        String expectedOutput = "[Anhui, Beijing, Chongqing, Fujian, Gansu, Guangdong, Guangxi, Guizhou, Hainan, Hebei, Heilongjiang, Henan, Hubei, Hunan, Inner Mongolia, Jiangsu, Jiangxi, Jilin, Liaoning, Ningxia, Qinghai, Shaanxi, Shandong, Shanghai, Shanxi, Sichuan, Tianjin, Tibet, Xinjiang, Yunnan, Zhejiang]";
+
+        String toBeParsed = "{\"status\":\"success\",\"data\":[{\"state\":\"Anhui\"},{\"state\":\"Beijing\"},{\"state\":\"Chongqing\"},{\"state\":\"Fujian\"},{\"state\":\"Gansu\"},{\"state\":\"Guangdong\"},{\"state\":\"Guangxi\"},{\"state\":\"Guizhou\"},{\"state\":\"Hainan\"},{\"state\":\"Hebei\"},{\"state\":\"Heilongjiang\"},{\"state\":\"Henan\"},{\"state\":\"Hubei\"},{\"state\":\"Hunan\"},{\"state\":\"Inner Mongolia\"},{\"state\":\"Jiangsu\"},{\"state\":\"Jiangxi\"},{\"state\":\"Jilin\"},{\"state\":\"Liaoning\"},{\"state\":\"Ningxia\"},{\"state\":\"Qinghai\"},{\"state\":\"Shaanxi\"},{\"state\":\"Shandong\"},{\"state\":\"Shanghai\"},{\"state\":\"Shanxi\"},{\"state\":\"Sichuan\"},{\"state\":\"Tianjin\"},{\"state\":\"Tibet\"},{\"state\":\"Xinjiang\"},{\"state\":\"Yunnan\"},{\"state\":\"Zhejiang\"}]}";
+
+        ArrayList<String> actualOutput = JsonParser.parseSupportedStates(toBeParsed);
+
+        Assert.assertEquals(expectedOutput,actualOutput.toString());
 
     }
+
+
+
 }
