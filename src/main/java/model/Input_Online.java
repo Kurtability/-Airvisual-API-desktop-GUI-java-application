@@ -20,25 +20,36 @@ public class Input_Online implements InputFacade{
 
     }
 
+    private String getApiRequest(String uri) throws IOException, InterruptedException {
+        return null;
+    }
+
+
 
     @Override
     public String Input_listSupportedCountries() throws IOException, InterruptedException {
-        return null;
+        String response = getApiRequest("https://api.airvisual.com/v2/countries?key="+API_key);
+        return response;
     }
 
     @Override
     public String Input_listSupportedStatesFromChosenCountry(String country) throws IOException, InterruptedException {
-        return null;
+        String response = getApiRequest("https://api.airvisual.com/v2/states?country="+country+"&key=" + API_key);
+
+        return response;
     }
 
     @Override
     public String Input_listSupportedCitiesFromChosenState(String state, String country) throws IOException, InterruptedException {
-        return null;
+        String response = getApiRequest("https://api.airvisual.com/v2/cities?state="+state + "&country=" +country + "&key=" +API_key);
+
+        return response;
     }
 
     @Override
     public String Input_listSpecifiedCityDataFromChosenState(String city, String state, String country) throws IOException, InterruptedException {
-        return null;
+        String response = getApiRequest("https://api.airvisual.com/v2/city?city="+city+"&state="+state+"&country="+country+"&key=" +API_key);
+        return response;
     }
 
 

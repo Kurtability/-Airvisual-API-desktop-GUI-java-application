@@ -37,4 +37,9 @@ public class ModelFacadeImpl implements ModelFacade {
         String response = inputFacade.Input_listSpecifiedCityDataFromChosenState(city,state,country);
         return response;
     }
+
+    @Override
+    public String Output_sendSMS(String report) {
+        return null;
+    }
 }

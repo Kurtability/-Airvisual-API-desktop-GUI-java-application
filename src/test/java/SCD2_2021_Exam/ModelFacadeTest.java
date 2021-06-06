@@ -7,7 +7,9 @@ import model.InputFacade;
 import model.ModelFacade;
 import model.ModelFacadeImpl;
 import model.OutputFacade;
+import org.junit.Assert;
 import org.junit.Test;
+import presenter.JsonParser;
 
 import java.io.IOException;
 
@@ -96,5 +98,121 @@ public class ModelFacadeTest {
         // test how my model handles the return
         assertEquals(model.Input_listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry),mockResponse);
         verify(inputFacade).Input_listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry);
+    }
+
+
+
+    //test output api
+
+
+
+    //test JsonParser
+    @Test
+    public void JsonParser1Test(){
+        //white box testing, no mock
+        String expectedOutput = "status: success\n" +
+                "country: Afghanistan\n" +
+                "country: Algeria\n" +
+                "country: Andorra\n" +
+                "country: Angola\n" +
+                "country: Argentina\n" +
+                "country: Armenia\n" +
+                "country: Australia\n" +
+                "country: Austria\n" +
+                "country: Bahamas\n" +
+                "country: Bahrain\n" +
+                "country: Bangladesh\n" +
+                "country: Belgium\n" +
+                "country: Bolivia\n" +
+                "country: Bosnia Herzegovina\n" +
+                "country: Brazil\n" +
+                "country: Brunei\n" +
+                "country: Bulgaria\n" +
+                "country: Canada\n" +
+                "country: Chile\n" +
+                "country: China\n" +
+                "country: Colombia\n" +
+                "country: Croatia\n" +
+                "country: Cyprus\n" +
+                "country: Czech Republic\n" +
+                "country: Democratic Republic of the Congo\n" +
+                "country: Denmark\n" +
+                "country: Ecuador\n" +
+                "country: Ethiopia\n" +
+                "country: Finland\n" +
+                "country: France\n" +
+                "country: Germany\n" +
+                "country: Ghana\n" +
+                "country: Guatemala\n" +
+                "country: Hong Kong SAR\n" +
+                "country: Hungary\n" +
+                "country: India\n" +
+                "country: Indonesia\n" +
+                "country: Iran\n" +
+                "country: Iraq\n" +
+                "country: Ireland\n" +
+                "country: Israel\n" +
+                "country: Italy\n" +
+                "country: Ivory Coast\n" +
+                "country: Japan\n" +
+                "country: Jordan\n" +
+                "country: Kazakhstan\n" +
+                "country: Kosovo\n" +
+                "country: Kuwait\n" +
+                "country: Kyrgyzstan\n" +
+                "country: Latvia\n" +
+                "country: Lithuania\n" +
+                "country: Luxembourg\n" +
+                "country: Macao SAR\n" +
+                "country: Malaysia\n" +
+                "country: Malta\n" +
+                "country: Mexico\n" +
+                "country: Mongolia\n" +
+                "country: Myanmar\n" +
+                "country: Nepal\n" +
+                "country: Netherlands\n" +
+                "country: New Caledonia\n" +
+                "country: New Zealand\n" +
+                "country: Nigeria\n" +
+                "country: North Macedonia\n" +
+                "country: Norway\n" +
+                "country: Oman\n" +
+                "country: Pakistan\n" +
+                "country: Palestinian Territory\n" +
+                "country: Peru\n" +
+                "country: Philippines\n" +
+                "country: Poland\n" +
+                "country: Portugal\n" +
+                "country: Puerto Rico\n" +
+                "country: Romania\n" +
+                "country: Russia\n" +
+                "country: San Marino\n" +
+                "country: Serbia\n" +
+                "country: Singapore\n" +
+                "country: Slovakia\n" +
+                "country: Slovenia\n" +
+                "country: South Africa\n" +
+                "country: South Korea\n" +
+                "country: Spain\n" +
+                "country: Sri Lanka\n" +
+                "country: Svalbard and Jan Mayen\n" +
+                "country: Sweden\n" +
+                "country: Switzerland\n" +
+                "country: Syria\n" +
+                "country: Taiwan\n" +
+                "country: Thailand\n" +
+                "country: Turkey\n" +
+                "country: U.S. Virgin Islands\n" +
+                "country: USA\n" +
+                "country: Uganda\n" +
+                "country: Ukraine\n" +
+                "country: United Arab Emirates\n" +
+                "country: United Kingdom\n" +
+                "country: Uzbekistan\n" +
+                "country: Vietnam\n" +
+                "country: Yemen";
+
+        String toBeParsed = "{\"status\":\"success\",\"data\":[{\"country\":\"Afghanistan\"},{\"country\":\"Algeria\"},{\"country\":\"Andorra\"},{\"country\":\"Angola\"},{\"country\":\"Argentina\"},{\"country\":\"Armenia\"},{\"country\":\"Australia\"},{\"country\":\"Austria\"},{\"country\":\"Bahamas\"},{\"country\":\"Bahrain\"},{\"country\":\"Bangladesh\"},{\"country\":\"Belgium\"},{\"country\":\"Bolivia\"},{\"country\":\"Bosnia Herzegovina\"},{\"country\":\"Brazil\"},{\"country\":\"Brunei\"},{\"country\":\"Bulgaria\"},{\"country\":\"Canada\"},{\"country\":\"Chile\"},{\"country\":\"China\"},{\"country\":\"Colombia\"},{\"country\":\"Croatia\"},{\"country\":\"Cyprus\"},{\"country\":\"Czech Republic\"},{\"country\":\"Democratic Republic of the Congo\"},{\"country\":\"Denmark\"},{\"country\":\"Ecuador\"},{\"country\":\"Ethiopia\"},{\"country\":\"Finland\"},{\"country\":\"France\"},{\"country\":\"Germany\"},{\"country\":\"Ghana\"},{\"country\":\"Guatemala\"},{\"country\":\"Hong Kong SAR\"},{\"country\":\"Hungary\"},{\"country\":\"India\"},{\"country\":\"Indonesia\"},{\"country\":\"Iran\"},{\"country\":\"Iraq\"},{\"country\":\"Ireland\"},{\"country\":\"Israel\"},{\"country\":\"Italy\"},{\"country\":\"Ivory Coast\"},{\"country\":\"Japan\"},{\"country\":\"Jordan\"},{\"country\":\"Kazakhstan\"},{\"country\":\"Kosovo\"},{\"country\":\"Kuwait\"},{\"country\":\"Kyrgyzstan\"},{\"country\":\"Latvia\"},{\"country\":\"Lithuania\"},{\"country\":\"Luxembourg\"},{\"country\":\"Macao SAR\"},{\"country\":\"Malaysia\"},{\"country\":\"Malta\"},{\"country\":\"Mexico\"},{\"country\":\"Mongolia\"},{\"country\":\"Myanmar\"},{\"country\":\"Nepal\"},{\"country\":\"Netherlands\"},{\"country\":\"New Caledonia\"},{\"country\":\"New Zealand\"},{\"country\":\"Nigeria\"},{\"country\":\"North Macedonia\"},{\"country\":\"Norway\"},{\"country\":\"Oman\"},{\"country\":\"Pakistan\"},{\"country\":\"Palestinian Territory\"},{\"country\":\"Peru\"},{\"country\":\"Philippines\"},{\"country\":\"Poland\"},{\"country\":\"Portugal\"},{\"country\":\"Puerto Rico\"},{\"country\":\"Romania\"},{\"country\":\"Russia\"},{\"country\":\"San Marino\"},{\"country\":\"Serbia\"},{\"country\":\"Singapore\"},{\"country\":\"Slovakia\"},{\"country\":\"Slovenia\"},{\"country\":\"South Africa\"},{\"country\":\"South Korea\"},{\"country\":\"Spain\"},{\"country\":\"Sri Lanka\"},{\"country\":\"Svalbard and Jan Mayen\"},{\"country\":\"Sweden\"},{\"country\":\"Switzerland\"},{\"country\":\"Syria\"},{\"country\":\"Taiwan\"},{\"country\":\"Thailand\"},{\"country\":\"Turkey\"},{\"country\":\"U.S. Virgin Islands\"},{\"country\":\"USA\"},{\"country\":\"Uganda\"},{\"country\":\"Ukraine\"},{\"country\":\"United Arab Emirates\"},{\"country\":\"United Kingdom\"},{\"country\":\"Uzbekistan\"},{\"country\":\"Vietnam\"},{\"country\":\"Yemen\"}]}";
+        Assert.assertEquals(JsonParser.parseSupportedCountries(toBeParsed), expectedOutput);
     }
 }

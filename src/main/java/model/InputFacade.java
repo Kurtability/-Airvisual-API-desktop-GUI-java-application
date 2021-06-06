@@ -2,7 +2,7 @@ package model;
 
 import java.io.IOException;
 
-public interface InputFacade extends ModelFacade {
+public interface InputFacade{
     String Input_listSupportedCountries() throws IOException, InterruptedException;
 
     String Input_listSupportedStatesFromChosenCountry(String country) throws IOException, InterruptedException;
