@@ -63,7 +63,26 @@ public class JsonParser {
     //https://api.airvisual.com/v2/cities?state=Beijing&country=China&key=f942928c-b2ec-4ab7-a7d9-009d88f63d36
 
     public static ArrayList<String> parseSupportedCities(String toBeParsed){
-        return null;
+        ArrayList<String> cities = new ArrayList<>();
+
+        JSONObject obj = new JSONObject(toBeParsed);
+
+        if(obj.has("error")){
+            JSONObject error = obj.getJSONObject("error");
+            String error_message = error.getString("message");
+            System.out.println(error_message);
+        }
+
+        String status = obj.getString("status");
+        System.out.println("status: "+ status);
+
+        JSONArray arr = obj.getJSONArray("data");
+        for (int i = 0; i < arr.length(); i++) {
+            cities.add(arr.getJSONObject(i).getString("city"));
+//            String city = arr.getJSONObject(i).getString("city");
+//            System.out.println("city: "+ city);
+        }
+        return cities;
     }
 
 
