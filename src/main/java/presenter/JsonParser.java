@@ -88,7 +88,83 @@ public class JsonParser {
 
     //https://api.airvisual.com/v2/city?city=Beijing&state=Beijing&country=China&key=f942928c-b2ec-4ab7-a7d9-009d88f63d36
     public static LinkedHashMap<String,String>  parseSpecifiedCityData(String toBeParsed){
+        LinkedHashMap<String,String> result = new LinkedHashMap<>();
 
-        return null;
+        JSONObject obj = new JSONObject(toBeParsed);
+
+        if(obj.has("error")){
+            JSONObject error = obj.getJSONObject("error");
+            String error_message = error.getString("message");
+            System.out.println(error_message);
+        }
+
+        String status = obj.getString("status");
+        System.out.println("status: " + status);
+
+        JSONObject data_obj = obj.getJSONObject("data");
+
+        String city = data_obj.getString("city");
+        result.put("city", city);
+
+        String state = data_obj.getString("state");
+        result.put("state", state);
+
+        String country = data_obj.getString("country");
+        result.put("country", country);
+
+
+        JSONObject location_obj = data_obj.getJSONObject("location");
+        String location_type = location_obj.getString("type");
+        result.put("location type", location_type);
+
+        JSONArray coordinates_arr = location_obj.getJSONArray("coordinates");
+        for (int i = 0; i < coordinates_arr.length(); i++){
+
+            double coordinates = coordinates_arr.getDouble((i));
+            result.put("location coordinate " + i, String.valueOf(coordinates));
+        }
+
+        JSONObject current_obj = data_obj.getJSONObject("current");
+        JSONObject currentWeather_obj = current_obj.getJSONObject("weather");
+        String currentWeather_ts = currentWeather_obj.getString("ts");
+        result.put("current weather ts", currentWeather_ts);
+
+        double currentWeather_tp = currentWeather_obj.getDouble("tp");
+        result.put("current weather tp" , String.valueOf(currentWeather_tp));
+
+        double currentWeather_pr = currentWeather_obj.getDouble("pr");
+        result.put("current weather pr", String.valueOf(currentWeather_pr));
+
+        double currentWeather_hu = currentWeather_obj.getDouble("hu");
+        result.put("current weather hu", String.valueOf(currentWeather_hu));
+
+        double currentWeather_ws = currentWeather_obj.getDouble("ws");
+        result.put("current weather ws", String.valueOf(currentWeather_ws));
+
+        double currentWeather_wd = currentWeather_obj.getDouble("wd");
+        result.put("current weather wd", String.valueOf(currentWeather_wd));
+
+        String currentWeather_ic = currentWeather_obj.getString("ic");
+        result.put("current weather ic", currentWeather_ic);
+
+
+
+        JSONObject currentPollution_obj = current_obj.getJSONObject("pollution");
+        String currentPollution_ts = currentPollution_obj.getString("ts");
+        result.put("current pollution ts", currentPollution_ts);
+
+        double currentPollution_aqius = currentPollution_obj.getDouble("aqius");
+        result.put("current pollution aqius", String.valueOf(currentPollution_aqius));
+
+        String currentPollution_mainus = currentPollution_obj.getString("mainus");
+        result.put("current pollution mainus", currentPollution_mainus);
+
+        double currentPollution_aqicn = currentPollution_obj.getDouble("aqicn");
+        result.put("current pollution aqicn", String.valueOf(currentPollution_aqicn));
+
+        String currentPollution_maincn = currentPollution_obj.getString("maincn");
+        result.put("current pollution maincn", currentPollution_maincn);
+
+        return result;
     }
 }
