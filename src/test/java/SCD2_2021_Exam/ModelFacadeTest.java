@@ -13,6 +13,7 @@ import presenter.JsonParser;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -183,6 +184,18 @@ public class ModelFacadeTest {
         ArrayList<String> actualOutput = JsonParser.parseSupportedCities(toBeParsed);
 
         Assert.assertEquals(expectedOutput,actualOutput.toString());
+    }
+
+    @Test
+    public void JsonParser4Test(){
+        String expectedOutput = "{city=Beijing, state=Beijing, country=China, location type=Point, location coordinate 0=116.462153, location coordinate 1=39.941674, current weather ts=2021-06-06T14:00:00.000Z, current weather tp=25.0, current weather pr=1006.0, current weather hu=47.0, current weather ws=3.0, current weather wd=120.0, current weather ic=10n, current pollution ts=2021-06-06T15:00:00.000Z, current pollution aqius=70.0, current pollution mainus=p2, current pollution aqicn=39.0, current pollution maincn=o3}";
+
+        String toBeParsed = "{\"status\":\"success\",\"data\":{\"city\":\"Beijing\",\"state\":\"Beijing\",\"country\":\"China\",\"location\":{\"type\":\"Point\",\"coordinates\":[116.462153,39.941674]},\"current\":{\"weather\":{\"ts\":\"2021-06-06T14:00:00.000Z\",\"tp\":25,\"pr\":1006,\"hu\":47,\"ws\":3,\"wd\":120,\"ic\":\"10n\"},\"pollution\":{\"ts\":\"2021-06-06T15:00:00.000Z\",\"aqius\":70,\"mainus\":\"p2\",\"aqicn\":39,\"maincn\":\"o3\"}}}}";
+
+        LinkedHashMap<String,String> actualOutput = JsonParser.parseSpecifiedCityData(toBeParsed);
+
+        Assert.assertEquals(expectedOutput,actualOutput.toString());
+
     }
 
 }
