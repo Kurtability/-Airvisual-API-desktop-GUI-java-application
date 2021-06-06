@@ -24,6 +24,9 @@ green: b9ee2b69ae832e7de8ebe19e52bc73701bd48433
 
 json 2nd function
 red: 80644e5759523c7023bfe5975f6ebba21485c595
-green:
+green:6c21fae092e55460d157ead0a0ee18b21feb69b1
+
+json 3rd function 
+red: 
 
 

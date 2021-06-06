@@ -174,6 +174,15 @@ public class ModelFacadeTest {
 
     }
 
+    @Test
+    public void JsonParser3Test(){
+        String expectedOutput = "[Beijing, Changping, Daxing, Fangshan, Liangxiang, Mentougou, Shunyi, Tongzhou]";
 
+        String toBeParsed = "{\"status\":\"success\",\"data\":[{\"city\":\"Beijing\"},{\"city\":\"Changping\"},{\"city\":\"Daxing\"},{\"city\":\"Fangshan\"},{\"city\":\"Liangxiang\"},{\"city\":\"Mentougou\"},{\"city\":\"Shunyi\"},{\"city\":\"Tongzhou\"}]}";
+
+        ArrayList<String> actualOutput = JsonParser.parseSupportedCities(toBeParsed);
+
+        Assert.assertEquals(expectedOutput,actualOutput.toString());
+    }
 
 }
