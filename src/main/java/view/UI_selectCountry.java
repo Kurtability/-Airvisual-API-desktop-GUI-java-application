@@ -27,7 +27,10 @@ public class UI_selectCountry extends Application {
 
     public void setUserChoiceCountry(String userChoiceCountry){
         if (userChoiceCountry.contains(" ")){
-            this.userChoiceCountry = userChoiceCountry.replace(" ","+");
+            this.userChoiceCountry = userChoiceCountry.replace(" ","-");
+            if (userChoiceCountry.contains("SAR")){
+                this.userChoiceCountry=this.userChoiceCountry.replace("SAR","");
+            }
 
         }
         else {
@@ -42,9 +45,9 @@ public class UI_selectCountry extends Application {
 
     public void setUserChoiceState(String userChoiceState){
         if (userChoiceState.contains(" ")){
-            this.userChoiceState = userChoiceState.replace(" ","+");
+            this.userChoiceState = userChoiceState.replace(" ","-");
             if(userChoiceState.contains("&")){
-                this.userChoiceState = this.userChoiceState.replace("&","%26");
+                this.userChoiceState = this.userChoiceState.replace("&","-");
             }
         }
         else {
@@ -58,7 +61,7 @@ public class UI_selectCountry extends Application {
 
     public void setUserChoiceCity(String userChoiceCity){
         if (userChoiceCity.contains(" ")){
-            this.userChoiceCity = userChoiceCity.replace(" ","+");
+            this.userChoiceCity = userChoiceCity.replace(" ","-");
 
         }
         else {
@@ -69,6 +72,9 @@ public class UI_selectCountry extends Application {
     public String getUserChoiceCity(){
         return this.userChoiceCity;
     }
+
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -91,9 +97,13 @@ public class UI_selectCountry extends Application {
         mainWindow.add(new Label("Welcome to AirVisual"),0,0);
         mainWindow.add(new Label("Please select a country to start"),0,1);
 
+        System.out.println(Input_Interface.Input_listSupportedCountries());
         ComboBox countryComboBox = new ComboBox();
-        countryComboBox.getItems().addAll(
-                JsonParser.parseSupportedCountries(Input_Interface.Input_listSupportedCountries()));
+        //!!!
+        // not working yet because i havent implemented get http
+        //!!!
+        countryComboBox.getItems().addAll(JsonParser.parseSupportedCountries(Input_Interface.Input_listSupportedCountries()));
+
         mainWindow.add(countryComboBox,0,2);
 
         Button selectCountryButton = new Button("Next");
@@ -224,6 +234,7 @@ public class UI_selectCountry extends Application {
                     });
                 } catch (Exception exception) {
                     exception.printStackTrace();
+                    System.out.println("the chosen country either does not exist in the current database or it does not have active stations");
                 }
             }
         });

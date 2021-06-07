@@ -20,6 +20,18 @@ import static org.mockito.Mockito.*;
 
 public class ModelFacadeTest {
 
+    // test postApiRequest in Output Api???
+    // no need
+
+
+    // test getApiRequest in InputApi??? havent i alr tested at line 48
+    // no need
+
+
+
+
+
+    // test input api
     @Test
     public void listSupportedCountriesTest_success() throws IOException, InterruptedException {
         // make a mock of the returned input api for this specific function

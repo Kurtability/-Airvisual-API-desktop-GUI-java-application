@@ -21,7 +21,13 @@ public class Input_Online implements InputFacade{
     }
 
     private String getApiRequest(String uri) throws IOException, InterruptedException {
-        return null;
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create(uri)).build();
+        //HttpRequest request = HttpRequest.newBuilder().uri(URI.create(uri)).setHeader("Authorization", "Bearer " + API_key).build();
+
+        String response = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+
+        return response;
     }
 
 

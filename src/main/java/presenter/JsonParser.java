@@ -74,6 +74,7 @@ public class JsonParser {
         }
 
         String status = obj.getString("status");
+
         System.out.println("status: "+ status);
 
         JSONArray arr = obj.getJSONArray("data");
