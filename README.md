@@ -40,4 +40,8 @@ green: 51f082bae8fcd57925d236d0c22a4f649fb56bca
 1st refactor: implemented the input online/offline instantiation from main App class
 2eed94751550738efb800e82d7c530c1fa0a489d
 
+2nd refactor: the parser now will handle errors from API, which will stop the program and prompt
+user advice to the console
+e189940c7e53f434f93c886fa19ec43a99a22c28
+
 
