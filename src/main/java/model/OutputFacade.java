@@ -2,6 +2,6 @@ package model;
 
 public interface OutputFacade{
 
-    String Output_sendSMS(String report);
+    String Output_sendSMS(String reportToSend);
 
 }

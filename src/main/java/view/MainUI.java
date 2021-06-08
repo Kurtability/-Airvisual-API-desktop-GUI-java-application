@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class MainUI extends Application {
 
-    public static InputFacade Input_Interface;
+    private static InputFacade Input_Interface;// InputModel contained in UI
 
 
     private String userChoiceCountry, userChoiceState, userChoiceCity;
@@ -24,7 +24,7 @@ public class MainUI extends Application {
     private Scene Input_countryMenu, Input_stateMenu, Input_cityMenu, resultMenu;
 
     public void setInputFacade(InputFacade facade){
-        this.Input_Interface = facade;
+        Input_Interface = facade;
     }
 
     public void setUserChoiceCountry(String userChoiceCountry){
@@ -162,11 +162,8 @@ public class MainUI extends Application {
                                         (Input_Interface.Input_listSupportedCitiesFromChosenState
                                                 (getUserChoiceState(),
                                                         getUserChoiceCountry())));
-                            } catch (IOException ioException) {
+                            } catch (IOException | InterruptedException ioException) {
                                 ioException.printStackTrace();
-                                System.exit(0);
-                            } catch (InterruptedException interruptedException) {
-                                interruptedException.printStackTrace();
                                 System.exit(0);
                             }
 
@@ -210,10 +207,8 @@ public class MainUI extends Application {
                                                         (getUserChoiceCity(),
                                                                 getUserChoiceState(),
                                                                 getUserChoiceCountry())).toString());
-                                    } catch (IOException ioException) {
+                                    } catch (IOException | InterruptedException ioException) {
                                         ioException.printStackTrace();
-                                    } catch (InterruptedException interruptedException) {
-                                        interruptedException.printStackTrace();
                                     }
 
                                     Button sendSMSButton = new Button("Send SMS");

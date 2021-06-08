@@ -39,7 +39,9 @@ public class ModelFacadeImpl implements ModelFacade {
     }
 
     @Override
-    public String Output_sendSMS(String report) {
+    public String Output_sendSMS(String reportToSend) {
         return null;
     }
+
+
 }

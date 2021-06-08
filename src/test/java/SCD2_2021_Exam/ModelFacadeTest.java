@@ -20,17 +20,6 @@ import static org.mockito.Mockito.*;
 
 public class ModelFacadeTest {
 
-    // test postApiRequest in Output Api???
-    // no need
-
-
-    // test getApiRequest in InputApi??? havent i alr tested at line 48
-    // no need
-
-
-
-
-
     // test input api
     @Test
     public void listSupportedCountriesTest_success() throws IOException, InterruptedException {
@@ -118,8 +107,30 @@ public class ModelFacadeTest {
 
     //test output api
     @Test
-    public void Output_sendSMS(){
+    public void Output_sendSMSTest() throws IOException, InterruptedException {
+        // make a mock of the returned input api for this specific function
 
+        InputFacade inputFacade = mock(InputFacade.class);
+        OutputFacade outputFacade = mock(OutputFacade.class);
+
+        ModelFacade model = new ModelFacadeImpl(inputFacade,outputFacade);
+
+        String mockOutputResponse = "You have send your report successfully!";
+        String mockCity = "Beijing";
+        String mockState = "Beijing";
+        String mockCountry = "China";
+        String mockResponse = "success";
+        when(inputFacade.Input_listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry)).thenReturn(mockResponse);
+
+        when(outputFacade.Output_sendSMS(mockResponse)).thenReturn(mockOutputResponse);
+
+
+        // test how my model handles the return
+        assertEquals(model.Input_listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry),mockResponse);
+        verify(inputFacade).Input_listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry);
+
+        assertEquals(model.Output_sendSMS(mockResponse),mockOutputResponse);
+        verify(outputFacade).Output_sendSMS(mockResponse);
     }
 
 

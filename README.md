@@ -44,4 +44,7 @@ green: 51f082bae8fcd57925d236d0c22a4f649fb56bca
 user advice to the console
 e189940c7e53f434f93c886fa19ec43a99a22c28
 
+first output API function
+red: 
+
 

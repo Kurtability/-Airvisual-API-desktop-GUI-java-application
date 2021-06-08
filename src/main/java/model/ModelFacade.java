@@ -12,5 +12,5 @@ public interface ModelFacade {
 
     String Input_listSpecifiedCityDataFromChosenState(String city, String state, String country) throws IOException, InterruptedException;
 
-    String Output_sendSMS(String report);
+    String Output_sendSMS(String reportToSend);
 }

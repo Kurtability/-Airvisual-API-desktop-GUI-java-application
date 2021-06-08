@@ -38,7 +38,7 @@ public class JsonParser {
         if(status.equals("fail")){
             JSONObject dataObj = obj.getJSONObject("data");
             String errorMessage = dataObj.getString("message");
-            System.out.println("error message: " + errorMessage +" its potentially caused by the change url formatting from API, please restart the program and select another country");
+            System.out.println("error message: " + errorMessage +" ,its potentially caused by the change url formatting from API, please restart the program and select another country");
             System.exit(0);
         }
 
@@ -63,7 +63,7 @@ public class JsonParser {
         if(status.equals("fail")){
             JSONObject dataObj = obj.getJSONObject("data");
             String errorMessage = dataObj.getString("message");
-            System.out.println("error message: " + errorMessage + " its potentially caused by the change url formatting from API , please restart the program and select another state from this country");
+            System.out.println("error message: " + errorMessage + " ,its potentially caused by the change url formatting from API, please restart the program and select another state from this country");
             System.exit(0);
         }
 
@@ -88,7 +88,7 @@ public class JsonParser {
         if(status.equals("fail")){
             JSONObject dataObj = obj.getJSONObject("data");
             String errorMessage = dataObj.getString("message");
-            System.out.println("error message: " + errorMessage + " its potentially caused by the change url formatting from API , please restart the program and select another city from this state");
+            System.out.println("error message: " + errorMessage + " ,its potentially caused by the change url formatting from API, please restart the program and select another city from this state");
             System.exit(0);
         }
 
