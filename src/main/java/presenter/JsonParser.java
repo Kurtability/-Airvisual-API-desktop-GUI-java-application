@@ -15,20 +15,12 @@ public class JsonParser {
 
         JSONObject obj = new JSONObject(toBeParsed);
 
-        if(obj.has("error")){
-            JSONObject error = obj.getJSONObject("error");
-            String error_message = error.getString("message");
-            System.out.println(error_message);
-        }
-
         String status = obj.getString("status");
         System.out.println("status: "+ status);
 
         JSONArray arr = obj.getJSONArray("data");
         for (int i = 0; i < arr.length(); i++) {
             countries.add(arr.getJSONObject(i).getString("country"));
-            //String country = arr.getJSONObject(i).getString("country");
-            //System.out.println("country: " + country);
         }
         return countries;
     }
@@ -41,20 +33,18 @@ public class JsonParser {
 
         JSONObject obj = new JSONObject(toBeParsed);
 
-        if(obj.has("error")){
-            JSONObject error = obj.getJSONObject("error");
-            String error_message = error.getString("message");
-            System.out.println(error_message);
-        }
-
         String status = obj.getString("status");
         System.out.println("status: "+ status);
+        if(status.equals("fail")){
+            JSONObject dataObj = obj.getJSONObject("data");
+            String errorMessage = dataObj.getString("message");
+            System.out.println("error message: " + errorMessage +" its potentially caused by the change url formatting from API, please restart the program and select another country");
+            System.exit(0);
+        }
 
         JSONArray arr = obj.getJSONArray("data");
         for (int i = 0; i < arr.length(); i++) {
             states.add(arr.getJSONObject(i).getString("state"));
-//            String state = arr.getJSONObject(i).getString("state");
-//            System.out.println("state: " + state);
         }
         return states;
     }
@@ -67,15 +57,15 @@ public class JsonParser {
 
         JSONObject obj = new JSONObject(toBeParsed);
 
-        if(obj.has("error")){
-            JSONObject error = obj.getJSONObject("error");
-            String error_message = error.getString("message");
-            System.out.println(error_message);
-        }
-
         String status = obj.getString("status");
 
         System.out.println("status: "+ status);
+        if(status.equals("fail")){
+            JSONObject dataObj = obj.getJSONObject("data");
+            String errorMessage = dataObj.getString("message");
+            System.out.println("error message: " + errorMessage + " its potentially caused by the change url formatting from API , please restart the program and select another state from this country");
+            System.exit(0);
+        }
 
         JSONArray arr = obj.getJSONArray("data");
         for (int i = 0; i < arr.length(); i++) {
@@ -93,14 +83,14 @@ public class JsonParser {
 
         JSONObject obj = new JSONObject(toBeParsed);
 
-        if(obj.has("error")){
-            JSONObject error = obj.getJSONObject("error");
-            String error_message = error.getString("message");
-            System.out.println(error_message);
-        }
-
         String status = obj.getString("status");
         System.out.println("status: " + status);
+        if(status.equals("fail")){
+            JSONObject dataObj = obj.getJSONObject("data");
+            String errorMessage = dataObj.getString("message");
+            System.out.println("error message: " + errorMessage + " its potentially caused by the change url formatting from API , please restart the program and select another city from this state");
+            System.exit(0);
+        }
 
         JSONObject data_obj = obj.getJSONObject("data");
 

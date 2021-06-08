@@ -10,19 +10,18 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.InputFacade;
-import model.Input_Offline;
-import model.Input_Online;
 import presenter.JsonParser;
 
 import java.io.IOException;
 
-public class UI_selectCountry extends Application {
+public class MainUI extends Application {
 
     public static InputFacade Input_Interface;
 
 
     private String userChoiceCountry, userChoiceState, userChoiceCity;
-    Scene Input_countryMenu, Input_stateMenu, Input_cityMenu, resultMenu;
+
+    private Scene Input_countryMenu, Input_stateMenu, Input_cityMenu, resultMenu;
 
     public void setInputFacade(InputFacade facade){
         this.Input_Interface = facade;
@@ -97,9 +96,6 @@ public class UI_selectCountry extends Application {
         mainWindow.add(new Label("Please select a country to start"),0,1);
 
         ComboBox countryComboBox = new ComboBox();
-        //!!!
-        // not working yet because i havent implemented get http
-        //!!!
         countryComboBox.getItems().addAll(JsonParser.parseSupportedCountries(Input_Interface.Input_listSupportedCountries()));
 
         mainWindow.add(countryComboBox,0,2);
@@ -168,8 +164,10 @@ public class UI_selectCountry extends Application {
                                                         getUserChoiceCountry())));
                             } catch (IOException ioException) {
                                 ioException.printStackTrace();
+                                System.exit(0);
                             } catch (InterruptedException interruptedException) {
                                 interruptedException.printStackTrace();
+                                System.exit(0);
                             }
 
                             cityWindow.add(cityComboBox,0,2);
@@ -216,9 +214,6 @@ public class UI_selectCountry extends Application {
                                         ioException.printStackTrace();
                                     } catch (InterruptedException interruptedException) {
                                         interruptedException.printStackTrace();
-                                    }catch (IllegalArgumentException e){
-                                        // GOTTA HANDLE THIS LATER ON !!!!!!!!!
-                                        System.out.println("the chosen city does not have active stations");
                                     }
 
                                     Button sendSMSButton = new Button("Send SMS");
@@ -232,7 +227,6 @@ public class UI_selectCountry extends Application {
                     });
                 } catch (Exception exception) {
                     exception.printStackTrace();
-                    System.out.println("the chosen country either does not exist in the current database or it does not have active stations");
                 }
             }
         });
