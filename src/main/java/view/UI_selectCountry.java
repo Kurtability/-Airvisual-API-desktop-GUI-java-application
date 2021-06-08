@@ -18,12 +18,15 @@ import java.io.IOException;
 
 public class UI_selectCountry extends Application {
 
-    // gotta refactor it later on, i think
     public static InputFacade Input_Interface;
 
 
     private String userChoiceCountry, userChoiceState, userChoiceCity;
     Scene Input_countryMenu, Input_stateMenu, Input_cityMenu, resultMenu;
+
+    public void setInputFacade(InputFacade facade){
+        this.Input_Interface = facade;
+    }
 
     public void setUserChoiceCountry(String userChoiceCountry){
         if (userChoiceCountry.contains(" ")){
@@ -80,7 +83,6 @@ public class UI_selectCountry extends Application {
     public void start(Stage primaryStage) throws Exception {
 
         // gotta refactor it later on, i think
-        Input_Interface= new Input_Online();
         //Input_Interface = new Input_Offline();
 
 
@@ -97,7 +99,6 @@ public class UI_selectCountry extends Application {
         mainWindow.add(new Label("Welcome to AirVisual"),0,0);
         mainWindow.add(new Label("Please select a country to start"),0,1);
 
-        System.out.println(Input_Interface.Input_listSupportedCountries());
         ComboBox countryComboBox = new ComboBox();
         //!!!
         // not working yet because i havent implemented get http
