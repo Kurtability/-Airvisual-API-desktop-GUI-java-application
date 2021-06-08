@@ -82,9 +82,6 @@ public class UI_selectCountry extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        // gotta refactor it later on, i think
-        //Input_Interface = new Input_Offline();
-
 
         ///////// countryScene
         primaryStage.setTitle("IQAIR API");

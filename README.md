@@ -1,6 +1,9 @@
 # SCD2_2021_Exam
-
-Require Extension!
+Applied for special consideration for the exam prework along with task4 since there is 
+no option for the exam prework when applying for special consideration, so i could only 
+click task4 (tutorial quizzes, take home quizzes). The medical report indicates
+that my study ability has been severely impacted from the 31st of May to the 7th
+of June. I shall update my new extension time once I receive the response. 
 
 first input api function
 red: 4a1c405dd613bff47c14615d5ec04ee0e82092eb
