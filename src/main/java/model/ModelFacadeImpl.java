@@ -40,7 +40,8 @@ public class ModelFacadeImpl implements ModelFacade {
 
     @Override
     public String Output_sendSMS(String reportToSend) {
-        return null;
+        String response = outputFacade.Output_sendSMS(reportToSend);
+        return response;
     }
 
 
