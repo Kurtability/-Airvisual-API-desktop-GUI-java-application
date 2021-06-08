@@ -34,4 +34,7 @@ json 4th function
 red: 63849d6c0d324d20fba5e4c176ddff58fcb77910
 green: 51f082bae8fcd57925d236d0c22a4f649fb56bca
 
+1st refactor: implemented the input online/offline instantiation from main App class
+2eed94751550738efb800e82d7c530c1fa0a489d
+
 
