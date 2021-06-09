@@ -39,7 +39,7 @@ public class ModelFacadeImpl implements ModelFacade {
     }
 
     @Override
-    public String Output_sendSMS(String reportToSend) {
+    public String Output_sendSMS(String reportToSend) throws IOException, InterruptedException {
         String response = outputFacade.Output_sendSMS(reportToSend);
         return response;
     }

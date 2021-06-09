@@ -10,21 +10,27 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.InputFacade;
+import model.OutputFacade;
 import presenter.JsonParser;
 
 import java.io.IOException;
 
 public class MainUI extends Application {
 
-    private static InputFacade Input_Interface;// InputModel contained in UI
+    private static InputFacade InputInterface;// InputModel contained in UI(view)
+    private static OutputFacade OutputInterface;// OutputModel contained in UI(view)
 
 
     private String userChoiceCountry, userChoiceState, userChoiceCity;
 
-    private Scene Input_countryMenu, Input_stateMenu, Input_cityMenu, resultMenu;
+    private Scene Input_countryMenu, Input_stateMenu, Input_cityMenu, resultMenu, sendSMSMenu;
 
     public void setInputFacade(InputFacade facade){
-        Input_Interface = facade;
+        InputInterface = facade;
+    }
+
+    public void setOutputFacade(OutputFacade facade){
+        OutputInterface = facade;
     }
 
     public void setUserChoiceCountry(String userChoiceCountry){
@@ -96,7 +102,7 @@ public class MainUI extends Application {
         mainWindow.add(new Label("Please select a country to start"),0,1);
 
         ComboBox countryComboBox = new ComboBox();
-        countryComboBox.getItems().addAll(JsonParser.parseSupportedCountries(Input_Interface.Input_listSupportedCountries()));
+        countryComboBox.getItems().addAll(JsonParser.parseSupportedCountries(InputInterface.Input_listSupportedCountries()));
 
         mainWindow.add(countryComboBox,0,2);
 
@@ -126,7 +132,7 @@ public class MainUI extends Application {
 
                     ComboBox stateComboBox = new ComboBox();
                     stateComboBox.getItems().addAll(
-                            JsonParser.parseSupportedStates(Input_Interface.
+                            JsonParser.parseSupportedStates(InputInterface.
                                     Input_listSupportedStatesFromChosenCountry(getUserChoiceCountry())));
 
                     stateWindow.add(stateComboBox,0,2);
@@ -159,7 +165,7 @@ public class MainUI extends Application {
                             ComboBox cityComboBox = new ComboBox();
                             try {
                                 cityComboBox.getItems().addAll(JsonParser.parseSupportedCities
-                                        (Input_Interface.Input_listSupportedCitiesFromChosenState
+                                        (InputInterface.Input_listSupportedCitiesFromChosenState
                                                 (getUserChoiceState(),
                                                         getUserChoiceCountry())));
                             } catch (IOException | InterruptedException ioException) {
@@ -203,7 +209,7 @@ public class MainUI extends Application {
 
                                     try {
                                         resultDisplay.setText(JsonParser.parseSpecifiedCityData(
-                                                Input_Interface.Input_listSpecifiedCityDataFromChosenState
+                                                InputInterface.Input_listSpecifiedCityDataFromChosenState
                                                         (getUserChoiceCity(),
                                                                 getUserChoiceState(),
                                                                 getUserChoiceCountry())).toString());
@@ -215,6 +221,44 @@ public class MainUI extends Application {
                                     resultWindow.add(sendSMSButton,0,3);
 
                                     primaryStage.setScene(resultMenu);
+                                    sendSMSButton.setOnAction(new EventHandler<ActionEvent>() {
+                                        @Override
+                                        public void handle(ActionEvent event) {
+
+                                            // sendSMSScene
+                                            primaryStage.setTitle("TWILLO API");
+                                            GridPane SMSWindow = new GridPane();
+                                            SMSWindow.setPadding(new Insets(15));
+                                            SMSWindow.setHgap(5);
+                                            SMSWindow.setVgap(5);
+                                            SMSWindow.setAlignment(Pos.CENTER);
+
+                                            sendSMSMenu = new Scene(SMSWindow,600,600);
+
+                                            SMSWindow.add(new Label("Welcome to Twillo"),0,0);
+                                            SMSWindow.add(new Label("Your sent SMS response is displayed below :)"),0,1);
+
+                                            TextArea SMSDisplay = new TextArea();
+                                            SMSDisplay.setEditable(false);
+                                            SMSDisplay.setPrefWidth(600);
+                                            SMSDisplay.setPrefHeight(100);
+                                            SMSDisplay.setWrapText(true);
+                                            SMSWindow.add(SMSDisplay,0,2);
+
+                                            try {
+//                                                SMSDisplay.setText(OutputInterface.Output_sendSMS(JsonParser.parseSpecifiedCityData(
+//                                                        InputInterface.Input_listSpecifiedCityDataFromChosenState
+//                                                                (getUserChoiceCity(),
+//                                                                        getUserChoiceState(),
+//                                                                        getUserChoiceCountry())).toString()));
+                                                SMSDisplay.setText(OutputInterface.Output_sendSMS("testing mic check"));
+                                            } catch (IOException | InterruptedException ioException) {
+                                                ioException.printStackTrace();
+                                            }
+
+                                            primaryStage.setScene(sendSMSMenu);
+                                        }
+                                    });
                                 }
                             });
 
