@@ -255,6 +255,7 @@ public class MainUI extends Application {
                                             } catch (IOException | InterruptedException ioException) {
                                                 ioException.printStackTrace();
                                             }
+                                            sendSMSButton.setDisable(true);
                                             primaryStage.setScene(sendSMSMenu);
                                         }
                                     });

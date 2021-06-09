@@ -1,9 +1,7 @@
 package model;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -34,16 +32,11 @@ public class Output_Online implements OutputFacade{
     }
 
 
-    public static String parseResponse(String body){
-        return null;
-    }
-
     private String postApiRequest(String uri,String sid, String authToken ,HttpRequest.BodyPublisher body) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         //encode sid and authtoken
         String login = String.format("%s:%s", sid, authToken);
-
         String encodedLogin = Base64.getEncoder().encodeToString(login.getBytes("utf-8"));
 
 
@@ -54,7 +47,6 @@ public class Output_Online implements OutputFacade{
 
         client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
-                .thenApply(Output_Online::parseResponse)
                 .join();
 
 
@@ -78,6 +70,7 @@ public class Output_Online implements OutputFacade{
 
 
         String response = postApiRequest("https://api.twilio.com/2010-04-01/Accounts/" + SID + "/Messages.json",SID,authToken,HttpRequest.BodyPublishers.ofString(content));
+        System.out.println("posted once!!! if you are getting double messages, then its twilio being funky with ya");
         return response;
     }
 }

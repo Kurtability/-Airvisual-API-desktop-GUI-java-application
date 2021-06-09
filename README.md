@@ -1,10 +1,13 @@
 # SCD2_2021_Exam
-Applied for special consideration for the exam prework along with task4 since there is 
-no option for the exam prework when applying for special consideration, so i could only 
-click task4 (tutorial quizzes, take home quizzes). The medical report indicates
-that my study ability has been severely impacted from the 31st of May to the 7th
-of June. I shall update my new extension time once I receive the response. 
+Applied for special consideration. New deadline shall be uploaded
+here once i receive the response.
 
+Quirks of the program:
+The output api might send report to the receiver's phone twice. Might
+be due reasons from the carrier's end. Already made sure that the 
+program sendspost request only once.
+
+TDD red-green-refactor process:
 first input api function
 red: 4a1c405dd613bff47c14615d5ec04ee0e82092eb
 green: 9d71a36cc89ebd985987351787c05e38e9c047cb
