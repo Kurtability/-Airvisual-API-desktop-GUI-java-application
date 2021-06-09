@@ -246,6 +246,7 @@ public class MainUI extends Application {
                                             SMSWindow.add(SMSDisplay,0,2);
 
                                             try {
+                                                sendSMSButton.setDisable(true);
                                                 SMSDisplay.setText(OutputInterface.Output_sendSMS(JsonParser.parseSpecifiedCityData(
                                                         InputInterface.Input_listSpecifiedCityDataFromChosenState
                                                                 (getUserChoiceCity(),
@@ -254,7 +255,6 @@ public class MainUI extends Application {
                                             } catch (IOException | InterruptedException ioException) {
                                                 ioException.printStackTrace();
                                             }
-
                                             primaryStage.setScene(sendSMSMenu);
                                         }
                                     });

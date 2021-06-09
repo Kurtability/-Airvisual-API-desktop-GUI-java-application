@@ -48,4 +48,7 @@ first output API function
 red: 671df74eb195e9e558f9e51b95095eaf000009d0
 green: 070a0f31f7870273842543668ca69f9a11ec1f21
 
+Output_sendSMS() is triggered twice when used within MainUI.java
+red: 28d2f3b4340217311ab64c903239b61aeebb817e
+
 
