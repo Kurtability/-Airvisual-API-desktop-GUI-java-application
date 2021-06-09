@@ -22,6 +22,7 @@ public class App {
             }
             else{
                 outputFacade = new Output_Online();
+                System.out.println("your are using the online output api");
             }
         }
 

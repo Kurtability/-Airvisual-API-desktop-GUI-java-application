@@ -10,18 +10,13 @@ import java.net.http.HttpResponse;
 public class Input_Online implements InputFacade{
 
     static String API_key = "f942928c-b2ec-4ab7-a7d9-009d88f63d36";
-    //private String API_key;
 
     public Input_Online(){
-        //this.API_key= API_key;
-
-
     }
 
     private String getApiRequest(String uri) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(uri)).build();
-        //HttpRequest request = HttpRequest.newBuilder().uri(URI.create(uri)).setHeader("Authorization", "Bearer " + API_key).build();
 
         String response = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
 

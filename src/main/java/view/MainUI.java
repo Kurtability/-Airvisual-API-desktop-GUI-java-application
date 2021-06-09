@@ -146,7 +146,7 @@ public class MainUI extends Application {
                         @Override
                         public void handle(ActionEvent event) {
                             setUserChoiceState((String) stateComboBox.getValue());
-                           System.out.println("u chose " + getUserChoiceState());
+                            System.out.println("u chose " + getUserChoiceState());
 
 
                             ///////// cityScene
@@ -184,7 +184,7 @@ public class MainUI extends Application {
                                 @Override
                                 public void handle(ActionEvent event) {
                                     setUserChoiceCity(cityComboBox.getValue().toString());
-                                    //System.out.println("u chose " + getUserChoiceCity());
+                                    System.out.println("u chose " + getUserChoiceCity());
 
 
                                     // resultScene
@@ -246,12 +246,11 @@ public class MainUI extends Application {
                                             SMSWindow.add(SMSDisplay,0,2);
 
                                             try {
-//                                                SMSDisplay.setText(OutputInterface.Output_sendSMS(JsonParser.parseSpecifiedCityData(
-//                                                        InputInterface.Input_listSpecifiedCityDataFromChosenState
-//                                                                (getUserChoiceCity(),
-//                                                                        getUserChoiceState(),
-//                                                                        getUserChoiceCountry())).toString()));
-                                                SMSDisplay.setText(OutputInterface.Output_sendSMS("testing mic check"));
+                                                SMSDisplay.setText(OutputInterface.Output_sendSMS(JsonParser.parseSpecifiedCityData(
+                                                        InputInterface.Input_listSpecifiedCityDataFromChosenState
+                                                                (getUserChoiceCity(),
+                                                                        getUserChoiceState(),
+                                                                        getUserChoiceCountry())).toString()));
                                             } catch (IOException | InterruptedException ioException) {
                                                 ioException.printStackTrace();
                                             }
