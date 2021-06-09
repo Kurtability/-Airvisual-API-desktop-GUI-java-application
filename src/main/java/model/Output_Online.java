@@ -1,6 +1,9 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -10,13 +13,26 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 public class Output_Online implements OutputFacade{
-    public static String SID = "AC7ebe48a1378366c19c7d1abe8630b48e";
-    public static String authToken = "bcbbc5a582297fbbc6763387dd5c70ad";
-    public static String fromTwilloPhoneNo = "+12675352180";
-    public static String toMyPhoneNo = "+61405088266";
+    public static String SID;
+    public static String authToken;
+    public static String fromTwilloPhoneNo;
+    public static String toMyPhoneNo;
+
+    public Output_Online() throws IOException {
+        FileInputStream fileInputStream = new FileInputStream("src/main/resources/config.properties");
+        Properties properties = new Properties();
+        properties.load(fileInputStream);
+
+        SID = properties.getProperty("TWILLO_API_SID");
+        authToken = properties.getProperty("TWILLO_API_AuthToken");
+        fromTwilloPhoneNo = properties.getProperty("TWILLO_API_FromTwilloPhoneNumber");
+        toMyPhoneNo = properties.getProperty("TWILLO_API_ToMyPhoneNUmber");
+    }
+
 
     public static String parseResponse(String body){
         return null;

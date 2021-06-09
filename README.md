@@ -50,5 +50,7 @@ green: 070a0f31f7870273842543668ca69f9a11ec1f21
 
 Output_sendSMS() is triggered twice when used within MainUI.java
 red: 28d2f3b4340217311ab64c903239b61aeebb817e
+green: bf7e1abcbac0dc1f56013c3b8d69abf5bc96ea0a
+// fixed the problem by setting the button to disable after one action has been handled
 
 

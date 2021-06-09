@@ -17,6 +17,12 @@ public class JsonParser {
 
         String status = obj.getString("status");
         System.out.println("status: "+ status);
+        if(status.equals("fail")){
+            JSONObject dataObj = obj.getJSONObject("data");
+            String errorMessage = dataObj.getString("message");
+            System.out.println("error message: " + errorMessage + ", please make sure the entered api key is valid");
+            System.exit(0);
+        }
 
         JSONArray arr = obj.getJSONArray("data");
         for (int i = 0; i < arr.length(); i++) {
