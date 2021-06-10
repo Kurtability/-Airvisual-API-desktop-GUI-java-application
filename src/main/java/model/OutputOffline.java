@@ -2,9 +2,9 @@ package model;
 
 import java.io.IOException;
 
-public class Output_Offline implements OutputFacade{
+public class OutputOffline implements OutputFacade{
     @Override
-    public String Output_sendSMS(String reportToSend) throws IOException, InterruptedException {
+    public String sendSMS(String reportToSend) throws IOException, InterruptedException {
         String dummyResponse = "{\"sid\": \"SMfc9d8bb6898044398c9b6fa3abf0ad6e\", \"date_created\": \"Wed, 09 Jun 2021 07:45:01 +0000\", " +
                 "\"date_updated\": \"Wed, 09 Jun 2021 07:45:01 +0000\", \"date_sent\": null, \"account_sid\": " +
                 "\"AC7ebe48a1378366c19c7d1abe8630b48e\", \"to\": \"+61405088266\", \"from\": \"+12675352180\", " +

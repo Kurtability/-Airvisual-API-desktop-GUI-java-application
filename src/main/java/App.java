@@ -1,10 +1,7 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.*;
-import org.checkerframework.checker.units.qual.C;
 import view.MainUI;
-
-import java.io.IOException;
 
 public class App extends Application{
 
@@ -20,38 +17,36 @@ public class App extends Application{
         MainUI mainUI;
 
         // offline version
-
         if(getParameters().getUnnamed().get(0).equals("offline")){
             System.out.println("you are using the offline input api");
-            inputFacade = new Input_Offline();
+            inputFacade = new InputOffline();
 
             if(getParameters().getUnnamed().get(1).equals("offline")){
-                outputFacade = new Output_Offline();
+                outputFacade = new OutputOffline();
                 System.out.println("you are using the offline output api");
             }
             else{
-                outputFacade = new Output_Online();
+                outputFacade = new OutputOnline();
                 System.out.println("your are using the online output api");
             }
-            mainUI = new MainUI(inputFacade,outputFacade);
         }
 
         // online version
         else{
             System.out.println("you are using the online input api");
-            inputFacade = new Input_Online();
+            inputFacade = new InputOnline();
 
             if(getParameters().getUnnamed().get(1).equals("offline")){
-                outputFacade = new Output_Offline();
+                outputFacade = new OutputOffline();
                 System.out.println("you are using the offline output api");
             }
             else{
-                outputFacade = new Output_Online();
+                outputFacade = new OutputOnline();
                 System.out.println("you are using the online output api");
             }
-            mainUI = new MainUI(inputFacade,outputFacade);
 
         }
+        mainUI = new MainUI(inputFacade,outputFacade);
         mainUI.start(primaryStage);
     }
 

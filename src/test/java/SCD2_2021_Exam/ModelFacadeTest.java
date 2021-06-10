@@ -32,12 +32,12 @@ public class ModelFacadeTest {
 
         String mockResponse = "success";
 
-        when(inputFacade.Input_listSupportedCountries()).thenReturn(mockResponse);
+        when(inputFacade.listSupportedCountries()).thenReturn(mockResponse);
 
 
         // test how my model handles the return
-        assertEquals(model.Input_listSupportedCountries(),mockResponse);
-        verify(inputFacade).Input_listSupportedCountries();
+        assertEquals(model.listSupportedCountries(),mockResponse);
+        verify(inputFacade).listSupportedCountries();
     }
 
     @Test
@@ -52,12 +52,12 @@ public class ModelFacadeTest {
         String mockCountry = "China";
         String mockResponse = "success";
 
-        when(inputFacade.Input_listSupportedStatesFromChosenCountry(mockCountry)).thenReturn(mockResponse);
+        when(inputFacade.listSupportedStatesFromChosenCountry(mockCountry)).thenReturn(mockResponse);
 
 
         // test how my model handles the return
-        assertEquals(model.Input_listSupportedStatesFromChosenCountry(mockCountry),mockResponse);
-        verify(inputFacade).Input_listSupportedStatesFromChosenCountry(mockCountry);
+        assertEquals(model.listSupportedStatesFromChosenCountry(mockCountry),mockResponse);
+        verify(inputFacade).listSupportedStatesFromChosenCountry(mockCountry);
     }
 
     @Test
@@ -73,12 +73,12 @@ public class ModelFacadeTest {
         String mockCountry = "China";
         String mockResponse = "success";
 
-        when(inputFacade.Input_listSupportedCitiesFromChosenState(mockState,mockCountry)).thenReturn(mockResponse);
+        when(inputFacade.listSupportedCitiesFromChosenState(mockState,mockCountry)).thenReturn(mockResponse);
 
 
         // test how my model handles the return
-        assertEquals(model.Input_listSupportedCitiesFromChosenState(mockState,mockCountry),mockResponse);
-        verify(inputFacade).Input_listSupportedCitiesFromChosenState(mockState,mockCountry);
+        assertEquals(model.listSupportedCitiesFromChosenState(mockState,mockCountry),mockResponse);
+        verify(inputFacade).listSupportedCitiesFromChosenState(mockState,mockCountry);
     }
 
     @Test
@@ -95,12 +95,12 @@ public class ModelFacadeTest {
         String mockCountry = "China";
         String mockResponse = "success";
 
-        when(inputFacade.Input_listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry)).thenReturn(mockResponse);
+        when(inputFacade.listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry)).thenReturn(mockResponse);
 
 
         // test how my model handles the return
-        assertEquals(model.Input_listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry),mockResponse);
-        verify(inputFacade).Input_listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry);
+        assertEquals(model.listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry),mockResponse);
+        verify(inputFacade).listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry);
     }
 
 
@@ -120,17 +120,17 @@ public class ModelFacadeTest {
         String mockState = "Beijing";
         String mockCountry = "China";
         String mockResponse = "success";
-        when(inputFacade.Input_listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry)).thenReturn(mockResponse);
+        when(inputFacade.listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry)).thenReturn(mockResponse);
 
-        when(outputFacade.Output_sendSMS(mockResponse)).thenReturn(mockOutputResponse);
+        when(outputFacade.sendSMS(mockResponse)).thenReturn(mockOutputResponse);
 
 
         // test how my model handles the return
-        assertEquals(model.Input_listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry),mockResponse);
-        verify(inputFacade).Input_listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry);
+        assertEquals(model.listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry),mockResponse);
+        verify(inputFacade).listSpecifiedCityDataFromChosenState(mockCity,mockState,mockCountry);
 
-        assertEquals(model.Output_sendSMS(mockResponse),mockOutputResponse);
-        verify(outputFacade).Output_sendSMS(mockResponse);
+        assertEquals(model.sendSMS(mockResponse),mockOutputResponse);
+        verify(outputFacade).sendSMS(mockResponse);
     }
 
 

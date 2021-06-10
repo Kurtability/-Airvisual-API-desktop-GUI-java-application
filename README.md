@@ -2,8 +2,12 @@
 Applied for special consideration. New deadline shall be uploaded
 here once I receive the response.
 
+
+
 Level of implemented features so far:
 pass
+
+
 
 Structure of the config file:
 IQAIR_API_Key: This is where the user enters his/her IQAIR api key
@@ -22,6 +26,13 @@ Quirks of the program:
 The output api might send report to the receiver's phone twice. Might
 be due reasons from the carrier's end. Already made sure that the 
 program sendspost request only once.
+
+Certain countries retrieved from the IQAIR api call are not coherent with the name of the countries stored in the IQAIR database,
+for example, listSupported countries would return Hong Kong SAR and United Kingdom, but in the real database, their names are 
+Hong Kong and UK. When this case happens, the program will prompt the error message to the terminal and ask the user to restart 
+the program and select another country instead. 
+
+
 
 TDD red-green-refactor process:
 first input api function
@@ -79,7 +90,7 @@ instantiated from the view, therefore finally achieving the split between view a
 extensibility and maintainability of the program are increased.
 9f6428187d7397c7f6ab8f554b5edf85d1cb2257
 
-
+4th refactor: updated all the functions and variables to follow camelcase convention
 
 
 

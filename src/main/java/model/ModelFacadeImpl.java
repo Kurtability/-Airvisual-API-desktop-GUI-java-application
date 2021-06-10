@@ -12,35 +12,35 @@ public class ModelFacadeImpl implements ModelFacade {
     }
 
     @Override
-    public String Input_listSupportedCountries() throws IOException, InterruptedException {
-        String response = inputFacade.Input_listSupportedCountries();
+    public String listSupportedCountries() throws IOException, InterruptedException {
+        String response = inputFacade.listSupportedCountries();
 
         return response;
 
     }
 
     @Override
-    public String Input_listSupportedStatesFromChosenCountry(String country) throws IOException, InterruptedException {
-        String response = inputFacade.Input_listSupportedStatesFromChosenCountry(country);
+    public String listSupportedStatesFromChosenCountry(String country) throws IOException, InterruptedException {
+        String response = inputFacade.listSupportedStatesFromChosenCountry(country);
 
         return response;
     }
 
     @Override
-    public String Input_listSupportedCitiesFromChosenState(String state, String country) throws IOException, InterruptedException {
-        String response = inputFacade.Input_listSupportedCitiesFromChosenState(state,country);
+    public String listSupportedCitiesFromChosenState(String state, String country) throws IOException, InterruptedException {
+        String response = inputFacade.listSupportedCitiesFromChosenState(state,country);
         return response;
     }
 
     @Override
-    public String Input_listSpecifiedCityDataFromChosenState(String city, String state, String country) throws IOException, InterruptedException {
-        String response = inputFacade.Input_listSpecifiedCityDataFromChosenState(city,state,country);
+    public String listSpecifiedCityDataFromChosenState(String city, String state, String country) throws IOException, InterruptedException {
+        String response = inputFacade.listSpecifiedCityDataFromChosenState(city,state,country);
         return response;
     }
 
     @Override
-    public String Output_sendSMS(String reportToSend) throws IOException, InterruptedException {
-        String response = outputFacade.Output_sendSMS(reportToSend);
+    public String sendSMS(String reportToSend) throws IOException, InterruptedException {
+        String response = outputFacade.sendSMS(reportToSend);
         return response;
     }
 

@@ -23,7 +23,7 @@ public class MainUI extends Application {
 
     private String userChoiceCountry, userChoiceState, userChoiceCity;
 
-    private Scene Input_countryMenu, Input_stateMenu, Input_cityMenu, resultMenu, sendSMSMenu;
+    private Scene inputCountryMenu, inputStateMenu, inputCityMenu, inputResultMenu, outputSendSMSMenu;
 
 
 
@@ -76,8 +76,6 @@ public class MainUI extends Application {
     }
 
 
-
-
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -90,14 +88,13 @@ public class MainUI extends Application {
         mainWindow.setVgap(5);
         mainWindow.setAlignment(Pos.CENTER);
 
-        Input_countryMenu = new Scene(mainWindow,600,600);
+        inputCountryMenu = new Scene(mainWindow,600,600);
 
         mainWindow.add(new Label("Welcome to AirVisual"),0,0);
         mainWindow.add(new Label("Please select a country to start"),0,1);
 
         ComboBox countryComboBox = new ComboBox();
-        //engine.Input_listSupportedCountries --> InputInterface.Input_listSupportedCountries()
-        countryComboBox.getItems().addAll(JsonParser.parseSupportedCountries(engine.Input_listSupportedCountries()));
+        countryComboBox.getItems().addAll(JsonParser.parseSupportedCountries(engine.listSupportedCountries()));
 
         mainWindow.add(countryComboBox,0,2);
 
@@ -120,7 +117,7 @@ public class MainUI extends Application {
                     stateWindow.setVgap(5);
                     stateWindow.setAlignment(Pos.CENTER);
 
-                    Input_stateMenu = new Scene(stateWindow,600,600);
+                    inputStateMenu = new Scene(stateWindow,600,600);
 
                     stateWindow.add(new Label("Welcome to AirVisual"),0,0);
                     stateWindow.add(new Label("Now please select a state"),0,1);
@@ -128,13 +125,13 @@ public class MainUI extends Application {
                     ComboBox stateComboBox = new ComboBox();
                     stateComboBox.getItems().addAll(
                             JsonParser.parseSupportedStates(engine.
-                                    Input_listSupportedStatesFromChosenCountry(getUserChoiceCountry())));
+                                    listSupportedStatesFromChosenCountry(getUserChoiceCountry())));
 
                     stateWindow.add(stateComboBox,0,2);
 
                     Button selectStateButton = new Button("Next");
                     stateWindow.add(selectStateButton,1,2);
-                    primaryStage.setScene(Input_stateMenu);
+                    primaryStage.setScene(inputStateMenu);
 
                     // handles action
                     selectStateButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -152,7 +149,7 @@ public class MainUI extends Application {
                             cityWindow.setVgap(5);
                             cityWindow.setAlignment(Pos.CENTER);
 
-                            Input_cityMenu = new Scene(cityWindow,600,600);
+                            inputCityMenu = new Scene(cityWindow,600,600);
 
                             cityWindow.add(new Label("Welcome to AirVisual"),0,0);
                             cityWindow.add(new Label("Now please select a city"),0,1);
@@ -160,7 +157,7 @@ public class MainUI extends Application {
                             ComboBox cityComboBox = new ComboBox();
                             try {
                                 cityComboBox.getItems().addAll(JsonParser.parseSupportedCities
-                                        (engine.Input_listSupportedCitiesFromChosenState
+                                        (engine.listSupportedCitiesFromChosenState
                                                 (getUserChoiceState(),
                                                         getUserChoiceCountry())));
                             } catch (IOException | InterruptedException ioException) {
@@ -173,7 +170,7 @@ public class MainUI extends Application {
                             Button selectCityButton = new Button("Next");
                             cityWindow.add(selectCityButton,1,2);
 
-                            primaryStage.setScene(Input_cityMenu);
+                            primaryStage.setScene(inputCityMenu);
                             // handles action
                             selectCityButton.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
@@ -190,7 +187,7 @@ public class MainUI extends Application {
                                     resultWindow.setVgap(5);
                                     resultWindow.setAlignment(Pos.CENTER);
 
-                                    resultMenu = new Scene(resultWindow,600,600);
+                                    inputResultMenu = new Scene(resultWindow,600,600);
 
                                     resultWindow.add(new Label("Welcome to AirVisual"),0,0);
                                     resultWindow.add(new Label("Your enquired data is displayed below :)"),0,1);
@@ -204,7 +201,7 @@ public class MainUI extends Application {
 
                                     try {
                                         resultDisplay.setText(JsonParser.parseSpecifiedCityData(
-                                                engine.Input_listSpecifiedCityDataFromChosenState
+                                                engine.listSpecifiedCityDataFromChosenState
                                                         (getUserChoiceCity(),
                                                                 getUserChoiceState(),
                                                                 getUserChoiceCountry())).toString());
@@ -215,7 +212,7 @@ public class MainUI extends Application {
                                     Button sendSMSButton = new Button("Send SMS");
                                     resultWindow.add(sendSMSButton,0,3);
 
-                                    primaryStage.setScene(resultMenu);
+                                    primaryStage.setScene(inputResultMenu);
                                     sendSMSButton.setOnAction(new EventHandler<ActionEvent>() {
                                         @Override
                                         public void handle(ActionEvent event) {
@@ -228,7 +225,7 @@ public class MainUI extends Application {
                                             SMSWindow.setVgap(5);
                                             SMSWindow.setAlignment(Pos.CENTER);
 
-                                            sendSMSMenu = new Scene(SMSWindow,600,600);
+                                            outputSendSMSMenu = new Scene(SMSWindow,600,600);
 
                                             SMSWindow.add(new Label("Welcome to Twillo"),0,0);
                                             SMSWindow.add(new Label("Your sent SMS response is displayed below :)"),0,1);
@@ -242,8 +239,8 @@ public class MainUI extends Application {
 
                                             try {
                                                 sendSMSButton.setDisable(true);
-                                                SMSDisplay.setText(engine.Output_sendSMS(JsonParser.parseSpecifiedCityData(
-                                                        engine.Input_listSpecifiedCityDataFromChosenState
+                                                SMSDisplay.setText(engine.sendSMS(JsonParser.parseSpecifiedCityData(
+                                                        engine.listSpecifiedCityDataFromChosenState
                                                                 (getUserChoiceCity(),
                                                                         getUserChoiceState(),
                                                                         getUserChoiceCountry())).toString()));
@@ -251,7 +248,7 @@ public class MainUI extends Application {
                                                 ioException.printStackTrace();
                                             }
                                             sendSMSButton.setDisable(true);
-                                            primaryStage.setScene(sendSMSMenu);
+                                            primaryStage.setScene(outputSendSMSMenu);
                                         }
                                     });
                                 }
@@ -264,7 +261,7 @@ public class MainUI extends Application {
                 }
             }
         });
-        primaryStage.setScene(Input_countryMenu);
+        primaryStage.setScene(inputCountryMenu);
         primaryStage.show();
     }
 }

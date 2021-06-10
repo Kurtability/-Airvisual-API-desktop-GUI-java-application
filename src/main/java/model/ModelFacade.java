@@ -4,13 +4,13 @@ import java.io.IOException;
 
 public interface ModelFacade {
 
-    String Input_listSupportedCountries() throws IOException, InterruptedException;
+    String listSupportedCountries() throws IOException, InterruptedException;
 
-    String Input_listSupportedStatesFromChosenCountry(String country) throws IOException, InterruptedException;
+    String listSupportedStatesFromChosenCountry(String country) throws IOException, InterruptedException;
 
-    String Input_listSupportedCitiesFromChosenState(String state, String country) throws IOException, InterruptedException;
+    String listSupportedCitiesFromChosenState(String state, String country) throws IOException, InterruptedException;
 
-    String Input_listSpecifiedCityDataFromChosenState(String city, String state, String country) throws IOException, InterruptedException;
+    String listSpecifiedCityDataFromChosenState(String city, String state, String country) throws IOException, InterruptedException;
 
-    String Output_sendSMS(String reportToSend) throws IOException, InterruptedException;
+    String sendSMS(String reportToSend) throws IOException, InterruptedException;
 }

@@ -3,12 +3,12 @@ package model;
 import java.io.IOException;
 
 public interface InputFacade{
-    String Input_listSupportedCountries() throws IOException, InterruptedException;
+    String listSupportedCountries() throws IOException, InterruptedException;
 
-    String Input_listSupportedStatesFromChosenCountry(String country) throws IOException, InterruptedException;
+    String listSupportedStatesFromChosenCountry(String country) throws IOException, InterruptedException;
 
-    String Input_listSupportedCitiesFromChosenState(String state, String country) throws IOException, InterruptedException;
+    String listSupportedCitiesFromChosenState(String state, String country) throws IOException, InterruptedException;
 
-    String Input_listSpecifiedCityDataFromChosenState(String city, String state, String country) throws IOException, InterruptedException;
+    String listSpecifiedCityDataFromChosenState(String city, String state, String country) throws IOException, InterruptedException;
 
 }

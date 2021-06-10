@@ -14,13 +14,13 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-public class Output_Online implements OutputFacade{
+public class OutputOnline implements OutputFacade{
     public static String SID;
     public static String authToken;
     public static String fromTwilloPhoneNo;
     public static String toMyPhoneNo;
 
-    public Output_Online() throws IOException {
+    public OutputOnline() throws IOException {
         FileInputStream fileInputStream = new FileInputStream("src/main/resources/config.properties");
         Properties properties = new Properties();
         properties.load(fileInputStream);
@@ -56,7 +56,7 @@ public class Output_Online implements OutputFacade{
     }
 
     @Override
-    public String Output_sendSMS(String report) throws IOException, InterruptedException {
+    public String sendSMS(String report) throws IOException, InterruptedException {
 
 
         Map<String, String> parameters = new HashMap<>();
