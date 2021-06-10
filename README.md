@@ -72,4 +72,14 @@ red: 28d2f3b4340217311ab64c903239b61aeebb817e
 green: bf7e1abcbac0dc1f56013c3b8d69abf5bc96ea0a
 // fixed the problem by setting the button to disable after one action has been handled
 
+3rd refactor: Changed the structure of the program, the main UI are now called within the start()
+of the main program. The model now contains the instantiation of input online/offline and output online/offline,
+that is passed from the if conditions from the start() of the main program. Furthermore, the model is now
+instantiated from the view, therefore finally achieving the split between view and model. By doing this, the 
+extensibility and maintainability of the program are increased.
+9f6428187d7397c7f6ab8f554b5edf85d1cb2257
+
+
+
+
 
