@@ -9,7 +9,7 @@ import model.ModelFacadeImpl;
 import model.OutputFacade;
 import org.junit.Assert;
 import org.junit.Test;
-import presenter.JsonParser;
+import parser.JsonParser;
 
 import java.io.IOException;
 import java.util.ArrayList;

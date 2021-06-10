@@ -9,29 +9,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.InputFacade;
-import model.OutputFacade;
-import presenter.JsonParser;
+import model.*;
+import parser.JsonParser;
 
 import java.io.IOException;
 
 public class MainUI extends Application {
 
-    private static InputFacade InputInterface;// InputModel contained in UI(view)
-    private static OutputFacade OutputInterface;// OutputModel contained in UI(view)
-
+    private ModelFacade engine;
+    public MainUI (InputFacade inputFacade, OutputFacade outputFacade) {
+        this.engine = new ModelFacadeImpl(inputFacade,outputFacade);
+    }
 
     private String userChoiceCountry, userChoiceState, userChoiceCity;
 
     private Scene Input_countryMenu, Input_stateMenu, Input_cityMenu, resultMenu, sendSMSMenu;
 
-    public void setInputFacade(InputFacade facade){
-        InputInterface = facade;
-    }
 
-    public void setOutputFacade(OutputFacade facade){
-        OutputInterface = facade;
-    }
 
     public void setUserChoiceCountry(String userChoiceCountry){
         if (userChoiceCountry.contains(" ")){
@@ -102,7 +96,8 @@ public class MainUI extends Application {
         mainWindow.add(new Label("Please select a country to start"),0,1);
 
         ComboBox countryComboBox = new ComboBox();
-        countryComboBox.getItems().addAll(JsonParser.parseSupportedCountries(InputInterface.Input_listSupportedCountries()));
+        //engine.Input_listSupportedCountries --> InputInterface.Input_listSupportedCountries()
+        countryComboBox.getItems().addAll(JsonParser.parseSupportedCountries(engine.Input_listSupportedCountries()));
 
         mainWindow.add(countryComboBox,0,2);
 
@@ -132,7 +127,7 @@ public class MainUI extends Application {
 
                     ComboBox stateComboBox = new ComboBox();
                     stateComboBox.getItems().addAll(
-                            JsonParser.parseSupportedStates(InputInterface.
+                            JsonParser.parseSupportedStates(engine.
                                     Input_listSupportedStatesFromChosenCountry(getUserChoiceCountry())));
 
                     stateWindow.add(stateComboBox,0,2);
@@ -165,7 +160,7 @@ public class MainUI extends Application {
                             ComboBox cityComboBox = new ComboBox();
                             try {
                                 cityComboBox.getItems().addAll(JsonParser.parseSupportedCities
-                                        (InputInterface.Input_listSupportedCitiesFromChosenState
+                                        (engine.Input_listSupportedCitiesFromChosenState
                                                 (getUserChoiceState(),
                                                         getUserChoiceCountry())));
                             } catch (IOException | InterruptedException ioException) {
@@ -209,7 +204,7 @@ public class MainUI extends Application {
 
                                     try {
                                         resultDisplay.setText(JsonParser.parseSpecifiedCityData(
-                                                InputInterface.Input_listSpecifiedCityDataFromChosenState
+                                                engine.Input_listSpecifiedCityDataFromChosenState
                                                         (getUserChoiceCity(),
                                                                 getUserChoiceState(),
                                                                 getUserChoiceCountry())).toString());
@@ -247,8 +242,8 @@ public class MainUI extends Application {
 
                                             try {
                                                 sendSMSButton.setDisable(true);
-                                                SMSDisplay.setText(OutputInterface.Output_sendSMS(JsonParser.parseSpecifiedCityData(
-                                                        InputInterface.Input_listSpecifiedCityDataFromChosenState
+                                                SMSDisplay.setText(engine.Output_sendSMS(JsonParser.parseSpecifiedCityData(
+                                                        engine.Input_listSpecifiedCityDataFromChosenState
                                                                 (getUserChoiceCity(),
                                                                         getUserChoiceState(),
                                                                         getUserChoiceCountry())).toString()));

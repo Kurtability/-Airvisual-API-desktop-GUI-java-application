@@ -1,6 +1,22 @@
 # SCD2_2021_Exam
 Applied for special consideration. New deadline shall be uploaded
-here once i receive the response.
+here once I receive the response.
+
+Level of implemented features so far:
+pass
+
+Structure of the config file:
+IQAIR_API_Key: This is where the user enters his/her IQAIR api key
+TWILLO_API_SID: This is where the user enters his/her TWILLO api sid
+TWILLO_API_AuthToken: This is where the user enters his/her TWILLO api authtoken
+TWILLO_API_FromTwilloPhoneNumber: This is where the user enters his/her TWILLO number that was generated from the free trial 
+TWILLO_API_ToMyPhoneNUmber: This is where the user enters his/her receiving number, however, the phone number has te be verified by TWILLO first
+
+
+reference of HTTP post/get 
+https://openjdk.java.net/groups/net/httpclient/intro.html where I got the sample of HTTP post/get request
+
+
 
 Quirks of the program:
 The output api might send report to the receiver's phone twice. Might
