@@ -34,7 +34,7 @@ public class InputOnline implements InputFacade{
 
 
     @Override
-    public String listSupportedCountries() throws IOException, InterruptedException {
+    public String listSupportedCountries() throws InterruptedException, IOException {
         String response = getApiRequest("https://api.airvisual.com/v2/countries?key="+ apiKey);
         return response;
     }

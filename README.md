@@ -86,11 +86,15 @@ green: bf7e1abcbac0dc1f56013c3b8d69abf5bc96ea0a
 3rd refactor: Changed the structure of the program, the main UI are now called within the start()
 of the main program. The model now contains the instantiation of input online/offline and output online/offline,
 that is passed from the if conditions from the start() of the main program. Furthermore, the model is now
-instantiated from the view, therefore finally achieving the split between view and model. By doing this, the 
-extensibility and maintainability of the program are increased.
+instantiated from within the view, therefore finally achieving the split between view and model. By doing this, the 
+extensibility and maintainability of the program are increased. 
+(The entry point of the program is now the main UI(the view))
 9f6428187d7397c7f6ab8f554b5edf85d1cb2257
 
 4th refactor: updated all the functions and variables to follow camelcase convention
+c9b83d92cd581badfabb9d930ffcad2ed1066dd2
+
+
 
 
 
