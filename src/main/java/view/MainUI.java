@@ -212,6 +212,10 @@ public class MainUI extends Application {
                                     Button sendSMSButton = new Button("Send SMS");
                                     resultWindow.add(sendSMSButton,0,3);
 
+                                    Button backToCountryMenuButton = new Button("Back");
+                                    resultWindow.add(backToCountryMenuButton,0,4);
+                                    backToCountryMenuButton.setOnAction(e-> primaryStage.setScene(inputCountryMenu));
+
                                     primaryStage.setScene(inputResultMenu);
                                     sendSMSButton.setOnAction(new EventHandler<ActionEvent>() {
                                         @Override
@@ -249,6 +253,10 @@ public class MainUI extends Application {
                                             }
                                             sendSMSButton.setDisable(true);
                                             primaryStage.setScene(outputSendSMSMenu);
+
+                                            Button backToCountryMenuButton = new Button("Back");
+                                            SMSWindow.add(backToCountryMenuButton,0,3);
+                                            backToCountryMenuButton.setOnAction(e-> primaryStage.setScene(inputCountryMenu));
                                         }
                                     });
                                 }
