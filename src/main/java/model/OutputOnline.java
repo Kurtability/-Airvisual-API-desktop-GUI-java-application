@@ -44,12 +44,6 @@ public class OutputOnline implements OutputFacade{
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(uri)).setHeader("Authorization", "Basic " + encodedLogin)
                 .headers("CONTENT-TYPE", "application/x-www-form-urlencoded").POST(body).build();
 
-
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
-                .thenApply(HttpResponse::body)
-                .join();
-
-
         //send request
         String response = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
         return response;

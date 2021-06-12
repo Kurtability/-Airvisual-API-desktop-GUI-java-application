@@ -6,10 +6,16 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.*;
+import model.InputFacade;
+import model.ModelFacade;
+import model.ModelFacadeImpl;
+import model.OutputFacade;
 import parser.JsonParser;
 
 import java.io.IOException;
@@ -21,7 +27,8 @@ public class MainUI extends Application {
         this.engine = new ModelFacadeImpl(inputFacade,outputFacade);
     }
 
-    private String userChoiceCountry, userChoiceState, userChoiceCity;
+    private String userChoiceCountry, userChoiceState, userChoiceCity, userChoiceInfo, cachedData = null;
+    Boolean backButtonPressed = false;
 
     private Scene inputCountryMenu, inputStateMenu, inputCityMenu, inputResultMenu, outputSendSMSMenu;
 
@@ -75,9 +82,17 @@ public class MainUI extends Application {
         return this.userChoiceCity;
     }
 
+    public void setUserChoiceInfo(String report){
+        this.userChoiceInfo = report;
+    }
+    public String getUserChoiceInfo(){
+        return this.userChoiceInfo;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
 
 
         ///////// countryScene
@@ -179,6 +194,7 @@ public class MainUI extends Application {
                                     System.out.println("u chose " + getUserChoiceCity());
 
 
+
                                     // resultScene
                                     primaryStage.setTitle("IQAIR API");
                                     GridPane resultWindow = new GridPane();
@@ -190,7 +206,7 @@ public class MainUI extends Application {
                                     inputResultMenu = new Scene(resultWindow,600,600);
 
                                     resultWindow.add(new Label("Welcome to AirVisual"),0,0);
-                                    resultWindow.add(new Label("Your enquired data is displayed below :)"),0,1);
+                                    resultWindow.add(new Label("Your enquired live data is displayed below :)"),0,1);
 
                                     TextArea resultDisplay = new TextArea();
                                     resultDisplay.setEditable(false);
@@ -209,14 +225,45 @@ public class MainUI extends Application {
                                         ioException.printStackTrace();
                                     }
 
+
                                     Button sendSMSButton = new Button("Send SMS");
-                                    resultWindow.add(sendSMSButton,0,3);
+                                    resultWindow.add(sendSMSButton,0,5);
+
+                                    Button useCachedDataButton = new Button("Show Cached Data");
+                                    resultWindow.add(useCachedDataButton,0,6);
+
 
                                     Button backToCountryMenuButton = new Button("Back");
-                                    resultWindow.add(backToCountryMenuButton,0,4);
-                                    backToCountryMenuButton.setOnAction(e-> primaryStage.setScene(inputCountryMenu));
+                                    resultWindow.add(backToCountryMenuButton,0,7);
+                                    backToCountryMenuButton.setOnAction(new EventHandler<ActionEvent>() {
+                                        @Override
+                                        public void handle(ActionEvent event) {
+                                            primaryStage.setScene(inputCountryMenu);
+                                            backButtonPressed = true;
+                                        }
+                                    });
+
 
                                     primaryStage.setScene(inputResultMenu);
+
+
+                                    /////////// caching the data
+                                    try {
+                                        setUserChoiceInfo(engine.listSpecifiedCityDataFromChosenState
+                                                (getUserChoiceCity(),
+                                                        getUserChoiceState(),
+                                                        getUserChoiceCountry()));
+                                    } catch (IOException ioException) {
+                                        ioException.printStackTrace();
+                                    } catch (InterruptedException interruptedException) {
+                                        interruptedException.printStackTrace();
+                                    }
+
+
+
+
+
+
                                     sendSMSButton.setOnAction(new EventHandler<ActionEvent>() {
                                         @Override
                                         public void handle(ActionEvent event) {

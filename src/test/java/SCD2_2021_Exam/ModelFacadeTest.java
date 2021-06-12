@@ -7,22 +7,24 @@ import model.InputFacade;
 import model.ModelFacade;
 import model.ModelFacadeImpl;
 import model.OutputFacade;
+import model.database.Database;
 import org.junit.Assert;
 import org.junit.Test;
 import parser.JsonParser;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class ModelFacadeTest {
 
     // test input api
     @Test
-    public void listSupportedCountriesTest_success() throws IOException, InterruptedException {
+    public void listSupportedCountriesTest() throws IOException, InterruptedException {
         // make a mock of the returned input api for this specific function
 
         InputFacade inputFacade = mock(InputFacade.class);
@@ -41,7 +43,7 @@ public class ModelFacadeTest {
     }
 
     @Test
-    public void listSupportedStatesFromChosenCountryTest_success() throws IOException, InterruptedException{
+    public void listSupportedStatesFromChosenCountryTest() throws IOException, InterruptedException{
         // make a mock of the returned input api for this specific function
 
         InputFacade inputFacade = mock(InputFacade.class);
@@ -61,7 +63,7 @@ public class ModelFacadeTest {
     }
 
     @Test
-    public void listSupportedCitiesFromChosenStateTest_success() throws IOException, InterruptedException {
+    public void listSupportedCitiesFromChosenStateTest() throws IOException, InterruptedException {
         // make a mock of the returned input api for this specific function
 
         InputFacade inputFacade = mock(InputFacade.class);
@@ -82,7 +84,7 @@ public class ModelFacadeTest {
     }
 
     @Test
-    public void listSpecifiedCityDataFromChosenStateTest_success() throws IOException, InterruptedException {
+    public void listSpecifiedCityDataFromChosenStateTest() throws IOException, InterruptedException {
         // make a mock of the returned input api for this specific function
 
         InputFacade inputFacade = mock(InputFacade.class);
@@ -107,7 +109,7 @@ public class ModelFacadeTest {
 
     //test output api
     @Test
-    public void Output_sendSMSTest() throws IOException, InterruptedException {
+    public void SendSMSTest() throws IOException, InterruptedException {
         // make a mock of the returned input api for this specific function
 
         InputFacade inputFacade = mock(InputFacade.class);
@@ -139,7 +141,7 @@ public class ModelFacadeTest {
 
     //test JsonParser
     @Test
-    public void JsonParser1Test(){
+    public void JsonParserFunction1Test(){
         //white box testing, no mock
         String expectedOutput = "[Afghanistan, Algeria, Andorra, Angola, Argentina, Armenia, Australia, Austria, Bahamas, Bahrain, Bangladesh, Belgium, Bolivia, Bosnia Herzegovina, Brazil, Brunei, Bulgaria, Canada, Chile, China, Colombia, Croatia, Cyprus, Czech Republic, Democratic Republic of the Congo, Denmark, Ecuador, Ethiopia, Finland, France, Germany, Ghana, Guatemala, Hong Kong SAR, Hungary, India, Indonesia, Iran, Iraq, Ireland, Israel, Italy, Ivory Coast, Japan, Jordan, Kazakhstan, Kosovo, Kuwait, Kyrgyzstan, Latvia, Lithuania, Luxembourg, Macao SAR, Malaysia, Malta, Mexico, Mongolia, Myanmar, Nepal, Netherlands, New Caledonia, New Zealand, Nigeria, North Macedonia, Norway, Oman, Pakistan, Palestinian Territory, Peru, Philippines, Poland, Portugal, Puerto Rico, Romania, Russia, San Marino, Serbia, Singapore, Slovakia, Slovenia, South Africa, South Korea, Spain, Sri Lanka, Svalbard and Jan Mayen, Sweden, Switzerland, Syria, Taiwan, Thailand, Turkey, U.S. Virgin Islands, USA, Uganda, Ukraine, United Arab Emirates, United Kingdom, Uzbekistan, Vietnam, Yemen]";
 
@@ -187,7 +189,7 @@ public class ModelFacadeTest {
     }
 
     @Test
-    public void JsonParser2Test(){
+    public void JsonParserFunction2Test(){
         String expectedOutput = "[Anhui, Beijing, Chongqing, Fujian, Gansu, Guangdong, Guangxi, Guizhou, Hainan, Hebei, Heilongjiang, Henan, Hubei, Hunan, Inner Mongolia, Jiangsu, Jiangxi, Jilin, Liaoning, Ningxia, Qinghai, Shaanxi, Shandong, Shanghai, Shanxi, Sichuan, Tianjin, Tibet, Xinjiang, Yunnan, Zhejiang]";
 
         String toBeParsed = "{\"status\":\"success\",\"data\":[{\"state\":\"Anhui\"},{\"state\":\"Beijing\"},{\"state\":\"Chongqing\"},{\"state\":\"Fujian\"},{\"state\":\"Gansu\"},{\"state\":\"Guangdong\"},{\"state\":\"Guangxi\"},{\"state\":\"Guizhou\"},{\"state\":\"Hainan\"},{\"state\":\"Hebei\"},{\"state\":\"Heilongjiang\"},{\"state\":\"Henan\"},{\"state\":\"Hubei\"},{\"state\":\"Hunan\"},{\"state\":\"Inner Mongolia\"},{\"state\":\"Jiangsu\"},{\"state\":\"Jiangxi\"},{\"state\":\"Jilin\"},{\"state\":\"Liaoning\"},{\"state\":\"Ningxia\"},{\"state\":\"Qinghai\"},{\"state\":\"Shaanxi\"},{\"state\":\"Shandong\"},{\"state\":\"Shanghai\"},{\"state\":\"Shanxi\"},{\"state\":\"Sichuan\"},{\"state\":\"Tianjin\"},{\"state\":\"Tibet\"},{\"state\":\"Xinjiang\"},{\"state\":\"Yunnan\"},{\"state\":\"Zhejiang\"}]}";
@@ -199,7 +201,7 @@ public class ModelFacadeTest {
     }
 
     @Test
-    public void JsonParser3Test(){
+    public void JsonParserFunction3Test(){
         String expectedOutput = "[Beijing, Changping, Daxing, Fangshan, Liangxiang, Mentougou, Shunyi, Tongzhou]";
 
         String toBeParsed = "{\"status\":\"success\",\"data\":[{\"city\":\"Beijing\"},{\"city\":\"Changping\"},{\"city\":\"Daxing\"},{\"city\":\"Fangshan\"},{\"city\":\"Liangxiang\"},{\"city\":\"Mentougou\"},{\"city\":\"Shunyi\"},{\"city\":\"Tongzhou\"}]}";
@@ -210,7 +212,7 @@ public class ModelFacadeTest {
     }
 
     @Test
-    public void JsonParser4Test(){
+    public void JsonParserFunction4Test(){
         String expectedOutput = "{city=Beijing, state=Beijing, country=China, location type=Point, location coordinate 0=116.462153, location coordinate 1=39.941674, current weather ts=2021-06-06T14:00:00.000Z, current weather tp=25.0, current weather pr=1006.0, current weather hu=47.0, current weather ws=3.0, current weather wd=120.0, current weather ic=10n, current pollution ts=2021-06-06T15:00:00.000Z, current pollution aqius=70.0, current pollution mainus=p2, current pollution aqicn=39.0, current pollution maincn=o3}";
 
         String toBeParsed = "{\"status\":\"success\",\"data\":{\"city\":\"Beijing\",\"state\":\"Beijing\",\"country\":\"China\",\"location\":{\"type\":\"Point\",\"coordinates\":[116.462153,39.941674]},\"current\":{\"weather\":{\"ts\":\"2021-06-06T14:00:00.000Z\",\"tp\":25,\"pr\":1006,\"hu\":47,\"ws\":3,\"wd\":120,\"ic\":\"10n\"},\"pollution\":{\"ts\":\"2021-06-06T15:00:00.000Z\",\"aqius\":70,\"mainus\":\"p2\",\"aqicn\":39,\"maincn\":\"o3\"}}}}";
@@ -219,6 +221,17 @@ public class ModelFacadeTest {
 
         Assert.assertEquals(expectedOutput,actualOutput.toString());
 
+    }
+
+    @Test
+    public void DatabaseFunction1Test(){
+
+        Connection con = Database.createNewDatabase();
+        Database.connectThenCreateTable(con);
+        Database.insertData(con,"testing city","testing state","testing country","testing info");
+        String actual =  Database.queryData(con);
+        String expected = "testing city testing state testing country testing info";
+        assertEquals(expected,actual);
     }
 
 }
