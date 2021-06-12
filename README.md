@@ -95,8 +95,8 @@ extensibility and maintainability of the program are increased.
 c9b83d92cd581badfabb9d930ffcad2ed1066dd2
 
 Database integrated test: 
-red:
-
+red: 26cd4a52b1f10503c157cc6e4662d05ee7b77a07
+green:
 
 
 

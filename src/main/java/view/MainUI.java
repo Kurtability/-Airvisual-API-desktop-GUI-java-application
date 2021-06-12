@@ -6,19 +6,15 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.InputFacade;
-import model.ModelFacade;
-import model.ModelFacadeImpl;
-import model.OutputFacade;
+import model.*;
+import model.database.Database;
 import parser.JsonParser;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 public class MainUI extends Application {
 
@@ -258,7 +254,42 @@ public class MainUI extends Application {
                                     } catch (InterruptedException interruptedException) {
                                         interruptedException.printStackTrace();
                                     }
+                                    /////////// caching the data
+                                    /////////// caching the data
+                                    Connection conn =  Database.createNewDatabase();
+                                    Database.connectThenCreateTable(conn);
+                                    Database.insertData(conn,getUserChoiceCity(),getUserChoiceState(),getUserChoiceCountry(),getUserChoiceInfo());
+                                    /////////// caching the data
 
+                                    /////////// caching the data
+                                    resultWindow.add(new Label("The cached data is displayed below :)"),0,3);
+                                    TextArea cacheDisplay = new TextArea();
+                                    cacheDisplay.setEditable(false);
+                                    cacheDisplay.setPrefWidth(600);
+                                    cacheDisplay.setPrefHeight(100);
+                                    cacheDisplay.setWrapText(true);
+                                    resultWindow.add(cacheDisplay,0,4);
+
+
+                                    //cacheDisplay.setText(cachedData);
+                                    useCachedDataButton.setOnAction(new EventHandler<ActionEvent>() {
+                                        @Override
+                                        public void handle(ActionEvent event) {
+
+
+                                            if(cachedData == null){
+                                                cacheDisplay.setText("ops, no cached data to show. If you click 'BACK' and choose the same city next time, " +
+                                                        "the cached data will be ready to displayed");
+                                                cachedData = Database.queryData(conn);
+                                            }else if(backButtonPressed == true){
+                                                // cached the data again
+                                                cacheDisplay.setText(cachedData);
+                                            }else{
+                                                cacheDisplay.setText(cachedData);
+                                            }
+                                        }
+                                    });
+                                    /////////// caching the data
 
 
 
