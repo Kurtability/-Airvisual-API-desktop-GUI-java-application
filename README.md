@@ -5,7 +5,7 @@ here once I receive the response.
 
 
 Level of implemented features so far:
-pass
+credit
 
 
 
@@ -23,15 +23,16 @@ https://openjdk.java.net/groups/net/httpclient/intro.html where I got the sample
 
 
 Quirks of the program:
-The output api might send report to the receiver's phone twice. Might
-be due reasons from the carrier's end. Already made sure that the 
-program sendspost request only once.
 
 Certain countries retrieved from the IQAIR api call are not coherent with the name of the countries stored in the IQAIR database,
 for example, listSupported countries would return Hong Kong SAR and United Kingdom, but in the real database, their names are 
 Hong Kong and UK. When this case happens, the program will prompt the error message to the terminal and ask the user to restart 
 the program and select another country instead. 
 
+Due to the structure and design of the program, the caching function of the program can only be provided under this user scenario, 
+the user chooses a country, chooses a state, chooses a city, click 'Show Cached Data' button, and follow the instruction to go back to the 
+main scen by clicking 'Back' to select the same city again, then once again click the 'Show Cached Data' button, the cached data will be displayed
+in the according text field.
 
 
 TDD red-green-refactor process:
@@ -96,7 +97,7 @@ c9b83d92cd581badfabb9d930ffcad2ed1066dd2
 
 Database integrated test: 
 red: 26cd4a52b1f10503c157cc6e4662d05ee7b77a07
-green:
+green: 9b810ea56a0be41e209dec8df45096d3c51ac9ba
 
 
 

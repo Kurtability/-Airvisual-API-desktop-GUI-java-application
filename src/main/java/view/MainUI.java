@@ -278,7 +278,7 @@ public class MainUI extends Application {
 
 
                                             if(cachedData == null){
-                                                cacheDisplay.setText("ops, no cached data to show. If you click 'BACK' and choose the same city next time, " +
+                                                cacheDisplay.setText("ops, no cached data to show. If you click 'BACK' now or click 'BACK' after you sendSMS, and choose the same city next time, " +
                                                         "the cached data will be ready to displayed");
                                                 cachedData = Database.queryData(conn);
                                             }else if(backButtonPressed == true){

@@ -62,14 +62,9 @@ public class Database {
             ResultSet rs = statement.executeQuery("SELECT * FROM citiesInfo");
             String result = rs.getString("city") + " " + rs.getString("state") + " "
                     + rs.getString("country") + " " + rs.getString("info");
-            //return result;
 
-            //loop through the result set
-            while (rs.next()) {
-                System.out.println(rs.getString("city") + " " + rs.getString("state") + " "
-                        + rs.getString("country") + " " + rs.getString("info"));
-            }
             return result;
+
         }catch (SQLException e){
             System.out.println(e.getMessage());
         }
