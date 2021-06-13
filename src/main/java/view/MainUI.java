@@ -18,13 +18,16 @@ import java.sql.Connection;
 
 public class MainUI extends Application {
 
+    private Connection conn =  Database.createNewDatabase();// creating a new database
+
+
     private ModelFacade engine;
     public MainUI (InputFacade inputFacade, OutputFacade outputFacade) {
         this.engine = new ModelFacadeImpl(inputFacade,outputFacade);
     }
 
     private String userChoiceCountry, userChoiceState, userChoiceCity, userChoiceInfo, cachedData = null;
-    Boolean backButtonPressed = false;
+    private Boolean backButtonPressed = false;
 
     private Scene inputCountryMenu, inputStateMenu, inputCityMenu, inputResultMenu, outputSendSMSMenu;
 
@@ -88,6 +91,7 @@ public class MainUI extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
+        Database.connectThenCreateTable(conn);
 
 
 
@@ -225,7 +229,7 @@ public class MainUI extends Application {
                                     Button sendSMSButton = new Button("Send SMS");
                                     resultWindow.add(sendSMSButton,0,5);
 
-                                    Button useCachedDataButton = new Button("Show Cached Data");
+                                    Button useCachedDataButton = new Button("Show Cached Data From Last Use");
                                     resultWindow.add(useCachedDataButton,0,6);
 
 
@@ -255,9 +259,6 @@ public class MainUI extends Application {
                                         interruptedException.printStackTrace();
                                     }
                                     /////////// caching the data
-                                    /////////// caching the data
-                                    Connection conn =  Database.createNewDatabase();
-                                    Database.connectThenCreateTable(conn);
                                     Database.insertData(conn,getUserChoiceCity(),getUserChoiceState(),getUserChoiceCountry(),getUserChoiceInfo());
                                     /////////// caching the data
 
@@ -270,21 +271,14 @@ public class MainUI extends Application {
                                     cacheDisplay.setWrapText(true);
                                     resultWindow.add(cacheDisplay,0,4);
 
-
-                                    //cacheDisplay.setText(cachedData);
                                     useCachedDataButton.setOnAction(new EventHandler<ActionEvent>() {
                                         @Override
                                         public void handle(ActionEvent event) {
 
-
-                                            if(cachedData == null){
-                                                cacheDisplay.setText("ops, no cached data to show. If you click 'BACK' now or click 'BACK' after you sendSMS, and choose the same city next time, " +
-                                                        "the cached data will be ready to displayed");
-                                                cachedData = Database.queryData(conn);
-                                            }else if(backButtonPressed == true){
-                                                // cached the data again
-                                                cacheDisplay.setText(cachedData);
+                                            if (backButtonPressed == false){
+                                                cacheDisplay.setText("ops, no cached data to show. If you click 'BACK' now or click 'BACK' after you sendSMS, and choose the same city next time, the cached data will be ready to displayed");
                                             }else{
+                                                cachedData = Database.queryData(conn);
                                                 cacheDisplay.setText(cachedData);
                                             }
                                         }
@@ -334,7 +328,14 @@ public class MainUI extends Application {
 
                                             Button backToCountryMenuButton = new Button("Back");
                                             SMSWindow.add(backToCountryMenuButton,0,3);
-                                            backToCountryMenuButton.setOnAction(e-> primaryStage.setScene(inputCountryMenu));
+                                            backToCountryMenuButton.setOnAction(new EventHandler<ActionEvent>() {
+                                                @Override
+                                                public void handle(ActionEvent event) {
+                                                    backButtonPressed = true;
+                                                    primaryStage.setScene(inputCountryMenu);
+                                                }
+                                            });
+
                                         }
                                     });
                                 }

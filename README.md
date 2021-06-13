@@ -30,9 +30,10 @@ Hong Kong and UK. When this case happens, the program will prompt the error mess
 the program and select another country instead. 
 
 Due to the structure and design of the program, the caching function of the program can only be provided under this user scenario, 
-the user chooses a country, chooses a state, chooses a city, click 'Show Cached Data' button, and follow the instruction to go back to the 
-main scen by clicking 'Back' to select the same city again, then once again click the 'Show Cached Data' button, the cached data will be displayed
-in the according text field.
+the user chooses a country, chooses a state, chooses a city, click 'Show Cached Data From Last Use' button, and follow the instruction to go back to the 
+main scene by clicking 'Back' to select the same city again, then once again click the 'Show Cached Data From Last Use button, the cached data will be displayed
+in the according text field. However, this can only be performed once, if the user wishes to perform the checking on data cached on another city, the user will have 
+to restart the program to do so. 
 
 
 TDD red-green-refactor process:
