@@ -4,12 +4,18 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.*;
+import model.InputFacade;
+import model.ModelFacade;
+import model.ModelFacadeImpl;
+import model.OutputFacade;
 import model.database.Database;
 import parser.JsonParser;
 
@@ -31,6 +37,9 @@ public class MainUI extends Application {
 
     private Scene inputCountryMenu, inputStateMenu, inputCityMenu, inputResultMenu, outputSendSMSMenu;
 
+    //extension
+    private ListView<String> extensionList;
+    //
 
 
     public void setUserChoiceCountry(String userChoiceCountry){
@@ -116,6 +125,13 @@ public class MainUI extends Application {
         Button selectCountryButton = new Button("Next");
         mainWindow.add(selectCountryButton,1,2);
 
+        //extension
+        extensionList = new ListView<>();
+        extensionList.setPrefHeight(70);
+        extensionList.setPrefWidth(100);
+        extensionList.setOrientation(Orientation.HORIZONTAL);
+        //
+
         // handles action, maybe assign it to Presenter later on
         selectCountryButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
@@ -147,6 +163,12 @@ public class MainUI extends Application {
                     Button selectStateButton = new Button("Next");
                     stateWindow.add(selectStateButton,1,2);
                     primaryStage.setScene(inputStateMenu);
+
+                    //extension
+                    stateWindow.add(new Label("The list displayed blow is a list of cities that you have searched. "),0,8);
+                    stateWindow.add(extensionList,0,9);
+                    //
+
 
                     // handles action
                     selectStateButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -186,6 +208,11 @@ public class MainUI extends Application {
                             cityWindow.add(selectCityButton,1,2);
 
                             primaryStage.setScene(inputCityMenu);
+                            //extension
+                            cityWindow.add(new Label("The list displayed blow is a list of cities that you have searched. "),0,8);
+                            cityWindow.add(extensionList,0,9);
+                            //
+
                             // handles action
                             selectCityButton.setOnAction(new EventHandler<ActionEvent>() {
                                 @Override
@@ -275,7 +302,7 @@ public class MainUI extends Application {
                                         @Override
                                         public void handle(ActionEvent event) {
 
-                                            if (backButtonPressed == false){
+                                            if (!backButtonPressed){
                                                 cacheDisplay.setText("ops, no cached data to show. If you click 'BACK' now or click 'BACK' after you sendSMS, and choose the same city next time, the cached data will be ready to displayed");
                                             }else{
                                                 cachedData = Database.queryData(conn);
@@ -286,7 +313,41 @@ public class MainUI extends Application {
                                     /////////// caching the data
 
 
+                                    //extension - popup window for choosing index
+                                    resultWindow.add(new Label("The list displayed blow is a list of cities that you have searched. "),0,8);
+                                    resultWindow.add(extensionList,0,9);
+                                    System.out.println(extensionList.getItems().size());
+                                    if (extensionList.getItems().size()<3){
+                                        extensionList.getItems().add(getUserChoiceCity());
+                                    }else{
+                                        //prompt the selecting index bar
+                                        Stage popUpWindow = new Stage();
 
+                                        popUpWindow.initModality(Modality.APPLICATION_MODAL);
+                                        popUpWindow.setTitle("Alert box");
+                                        popUpWindow.setMinWidth(360);
+                                        Label label = new Label("please choose an index of the city that you want to replace");
+                                        Button closeButton = new Button("Close the window");
+                                        closeButton.setOnAction(e->popUpWindow.close());
+
+                                        ComboBox<Integer> indexes = new ComboBox();
+                                        indexes.getItems().addAll(0,1,2);
+
+
+                                        VBox layout = new VBox(10);
+                                        layout.getChildren().addAll(label, indexes, closeButton);
+                                        layout.setAlignment(Pos.CENTER);
+
+                                        Scene scene = new Scene(layout);
+                                        popUpWindow.setScene(scene);
+                                        popUpWindow.showAndWait();
+
+                                        int index = indexes.getValue();
+                                        extensionList.getItems().remove(index);
+                                        extensionList.getItems().add(indexes.getValue(), getUserChoiceCity());
+
+                                    }
+                                    //
 
 
                                     sendSMSButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -314,16 +375,23 @@ public class MainUI extends Application {
                                             SMSWindow.add(SMSDisplay,0,2);
 
                                             try {
-                                                sendSMSButton.setDisable(true);
+                                                //extension
+                                                String reportTail = "";
+                                                for (String city : extensionList.getItems()){
+                                                    if (city != getUserChoiceCity()){
+                                                        reportTail += "(" + city + ") ";
+                                                    }
+                                                }
                                                 SMSDisplay.setText(engine.sendSMS(JsonParser.parseSpecifiedCityData(
                                                         engine.listSpecifiedCityDataFromChosenState
                                                                 (getUserChoiceCity(),
                                                                         getUserChoiceState(),
-                                                                        getUserChoiceCountry())).toString()));
+                                                                        getUserChoiceCountry())).toString()+ reportTail));
+                                                //extension
+
                                             } catch (IOException | InterruptedException ioException) {
                                                 ioException.printStackTrace();
                                             }
-                                            sendSMSButton.setDisable(true);
                                             primaryStage.setScene(outputSendSMSMenu);
 
                                             Button backToCountryMenuButton = new Button("Back");

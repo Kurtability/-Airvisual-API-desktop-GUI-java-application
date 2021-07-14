@@ -1,9 +1,4 @@
 # SCD2_2021_Exam
-Applied for special consideration. New deadline shall be uploaded
-here once I receive the response.
-
-
-
 Level of implemented features so far:
 credit
 
@@ -24,16 +19,24 @@ https://openjdk.java.net/groups/net/httpclient/intro.html where I got the sample
 
 Quirks of the program:
 
-Certain countries retrieved from the IQAIR api call are not coherent with the name of the countries stored in the IQAIR database,
+- Certain countries retrieved from the IQAIR api call are not coherent with the name of the countries stored in the IQAIR database,
 for example, listSupported countries would return Hong Kong SAR and United Kingdom, but in the real database, their names are 
 Hong Kong and UK. When this case happens, the program will prompt the error message to the terminal and ask the user to restart 
 the program and select another country instead. 
 
-Due to the structure and design of the program, the caching function of the program can only be provided under this user scenario, 
+- Due to the structure and design of the program, the caching function of the program can only be provided under this user scenario, 
 the user chooses a country, chooses a state, chooses a city, click 'Show Cached Data From Last Use' button, and follow the instruction to go back to the 
 main scene by clicking 'Back' to select the same city again, then once again click the 'Show Cached Data From Last Use button, the cached data will be displayed
 in the according text field. However, this can only be performed once, if the user wishes to perform the checking on data cached on another city, the user will have 
 to restart the program to do so. 
+
+Quriks of the Input/Output API:
+
+- Due to the IQAIR input API, please be mindful when marking, regarding the time between each input API call, so that the 'call per minute limit has been reached' error
+can be avoided. (I recommend query no more than 2 cities within one minute)
+
+- When marking, if you have not received the SMS instantly, please give it a 3-5 minutes wait
+
 
 
 TDD red-green-refactor process:
