@@ -41,7 +41,6 @@ public class MainUI extends Application {
     private ListView<String> extensionList;
     //
 
-
     public void setUserChoiceCountry(String userChoiceCountry){
         if (userChoiceCountry.contains(" ")){
             this.userChoiceCountry = userChoiceCountry.replace(" ","-");
@@ -93,6 +92,7 @@ public class MainUI extends Application {
     public void setUserChoiceInfo(String report){
         this.userChoiceInfo = report;
     }
+
     public String getUserChoiceInfo(){
         return this.userChoiceInfo;
     }
@@ -132,12 +132,12 @@ public class MainUI extends Application {
         extensionList.setOrientation(Orientation.HORIZONTAL);
         //
 
-        // handles action, maybe assign it to Presenter later on
+        // handles action
         selectCountryButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 try {
                     setUserChoiceCountry((String) countryComboBox.getValue());
-                    System.out.println("u chose country " + getUserChoiceCountry());
+                    System.out.println("You chose country " + getUserChoiceCountry());
 
 
                     ///////// stateScene
@@ -175,7 +175,7 @@ public class MainUI extends Application {
                         @Override
                         public void handle(ActionEvent event) {
                             setUserChoiceState((String) stateComboBox.getValue());
-                            System.out.println("u chose " + getUserChoiceState());
+                            System.out.println("You chose " + getUserChoiceState());
 
 
                             ///////// cityScene
@@ -218,7 +218,7 @@ public class MainUI extends Application {
                                 @Override
                                 public void handle(ActionEvent event) {
                                     setUserChoiceCity(cityComboBox.getValue().toString());
-                                    System.out.println("u chose " + getUserChoiceCity());
+                                    System.out.println("You chose " + getUserChoiceCity());
 
 
 
@@ -285,11 +285,9 @@ public class MainUI extends Application {
                                     } catch (InterruptedException interruptedException) {
                                         interruptedException.printStackTrace();
                                     }
-                                    /////////// caching the data
                                     Database.insertData(conn,getUserChoiceCity(),getUserChoiceState(),getUserChoiceCountry(),getUserChoiceInfo());
                                     /////////// caching the data
 
-                                    /////////// caching the data
                                     resultWindow.add(new Label("The cached data is displayed below :)"),0,3);
                                     TextArea cacheDisplay = new TextArea();
                                     cacheDisplay.setEditable(false);
@@ -313,14 +311,13 @@ public class MainUI extends Application {
                                     /////////// caching the data
 
 
-                                    //extension - popup window for choosing index
+                                    //extension
                                     resultWindow.add(new Label("The list displayed blow is a list of cities that you have searched. "),0,8);
                                     resultWindow.add(extensionList,0,9);
-                                    System.out.println(extensionList.getItems().size());
                                     if (extensionList.getItems().size()<3){
                                         extensionList.getItems().add(getUserChoiceCity());
                                     }else{
-                                        //prompt the selecting index bar
+
                                         Stage popUpWindow = new Stage();
 
                                         popUpWindow.initModality(Modality.APPLICATION_MODAL);
