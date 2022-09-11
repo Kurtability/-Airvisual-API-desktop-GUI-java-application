@@ -1,6 +1,4 @@
-# SCD2_2021_Exam
-Level of implemented features so far:
-credit
+# Airvisual-API-desktop-GUI-java-application
 
 
 
