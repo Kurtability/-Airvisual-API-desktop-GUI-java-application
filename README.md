@@ -1,5 +1,6 @@
 # Airvisual-API-desktop-GUI-java-application
 
+This is an application that consumes the Airvisual API using sequential calls returning lists the user selects from, drill down from country, to state, to city, and display an info panel about that city. It also has a sending report function that consumes the Twilio output API using the info generated from Airvisual API, where a user can send the report to various phone numbers that are registered with the output API. Moreover, SQLite was uitlised so that retrieved info from the Airvisual API can be cached, to improve user experience and application efficiency.
 
 
 Structure of the config file:
